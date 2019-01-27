@@ -1,23 +1,18 @@
 ---
-language: node_js
-node_js:
-  - "node"
-
-cache: npm
-
-install:
-  - npm install
+services:
+  - docker
 
 before_script:
-  - npm run test
+  - docker-compose build
 
 script:
-  - npm run build
+  - docker-compose run test
+  - docker-compose run build
 
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
-  local_dir: ./build/
+  local_dir: ./build/docker
   on:
     branch: master
