@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import { shallow } from 'enzyme';
 import { AppContainer } from './app.container';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<AppContainer />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  shallow(<AppContainer />);
 });
