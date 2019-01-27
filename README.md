@@ -1,34 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Localsurvey [![Build Status](https://travis-ci.com/decrn/localsurvey.svg?branch=master)](https://travis-ci.com/decrn/localsurvey)
 
-## Available Scripts
+Localsurvey allows users to quickly and effortlessly provide a survey system on any computer with a web browser, even without an active internet connection. Create your own surveys with an easy-to-use visual builder and serve it as many times as needed on the local machine. After you're done, export the data in common data formats to seamlessly process survey results.
 
-In the project directory, you can run:
+## Contributors
 
-### `npm start`
+This project was created by:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* [@kfrancois](https://github.com/kfrancois)
+* [@tuur29](https://github.com/tuur29)
+* [@vincevrp](https://github.com/vincevrp)
+* [@decrn](https://github.com/decrn)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We recommend using [Docker](https://www.docker.com/) with [docker-compose](https://docs.docker.com/compose/install/) to run the application. Alternatively, read the section at the bottom of the page to run without Docker. 
 
-### `npm run build`
+Start by building the Docker image: `docker-compose build`.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Running with Docker
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+##### `docker-compose up start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Point your browser to `localhost:3000`.
 
-## Learn More
+##### `docker-compose up test`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+We run [Enzyme](https://github.com/airbnb/enzyme) tests with [Jest](https://jestjs.io/).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### `docker-compose up build`
+
+To deploy the code to a static website under `./build/docker`.
+
+
+### Running without Docker
+
+You can run the app without docker, simply `npm i` then `npm start`.
