@@ -6,6 +6,7 @@
         "ter-indent": [true, 4],
         "import-name": [true, { "react": "React", "react-dom": "ReactDOM" }],
         "ter-arrow-parens": [false],
-        "trailing-comma": [false]
+        "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
+        "semicolon": [true, "always", "ignore-bound-class-methods"]
     }
 }

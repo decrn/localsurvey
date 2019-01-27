@@ -33,8 +33,8 @@
     "test": "jest",
     "tslint": "tslint -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",    
-    "prettier": "prettier --write 'src/**/*.{js,ts,css,less,md,json}'",
-    "prettier:check": "prettier --list-different 'src/**/*.{js,ts,css,less,md,json}'"
+    "prettier": "prettier --write '**/*.{js,ts,css,less,md,json,yml}'",
+    "prettier:check": "prettier --list-different '**/*.{js,ts,tsx,less,md,json,yml}'"
   },
   "eslintConfig": {
     "extends": "react-app"
