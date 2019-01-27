@@ -1,5 +1,6 @@
 import './styles/index.less';
 import React from 'react';
+// tslint:disable-next-line:import-name
 import ReactDOM from 'react-dom';
 import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
