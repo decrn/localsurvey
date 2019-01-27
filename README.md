@@ -1,3 +1,5 @@
+# Localsurvey [![Build Status](https://travis-ci.com/decrn/localsurvey.svg?branch=master)](https://travis-ci.com/decrn/localsurvey)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
