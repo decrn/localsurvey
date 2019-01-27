@@ -4,30 +4,36 @@ Localsurvey allows users to quickly and effortlessly provide a survey system on 
 
 ## Contributors
 
-This project was created by
+This project was created by:
 
-* Koen François
-* Tuur Lievens
-* Vince Verpaelst
-* Denis Carnier
+* [@kfrancois](https://github.com/kfrancois)
+* [@tuur29](https://github.com/tuur29)
+* [@vincevrp](https://github.com/vincevrp)
+* [@decrn](https://github.com/decrn)
 
 ## Getting Started
 
 ### Prerequisites
 
-* [Docker](https://www.docker.com/) and [`docker-compose`](https://docs.docker.com/compose/install/) for your platform
-* An active internet connection for installation
+We recommend using [Docker](https://www.docker.com/) with [docker-compose](https://docs.docker.com/compose/install/) to run the application. Alternatively, read the section at the bottom of the page to run without Docker. 
 
 Start by building the Docker image: `docker-compose build`.
 
-##### `docker-compose start`
+### Scripts
 
-Point your browser to `localhost:3000`
+##### `docker-compose up start`
 
-##### `docker-compose test`
+Point your browser to `localhost:3000`.
 
-We run [Enzyme](https://github.com/airbnb/enzyme) tests with [Jest](https://jestjs.io/)
+##### `docker-compose up test`
 
-##### `docker-compose build`
+We run [Enzyme](https://github.com/airbnb/enzyme) tests with [Jest](https://jestjs.io/).
 
-To deploy the code to a static website under `./build`
+##### `docker-compose up build`
+
+To deploy the code to a static website under `./build/docker`.
+
+
+### Running without Docker
+
+You can run the app without docker, simply `npm i` then `npm start`.
