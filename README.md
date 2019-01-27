@@ -19,7 +19,7 @@ We recommend using [Docker](https://www.docker.com/) with [docker-compose](https
 
 Start by building the Docker image: `docker-compose build`.
 
-### Scripts
+### Running with Docker
 
 ##### `docker-compose up start`
 
