@@ -1,5 +1,6 @@
 {
   "name": "localsurvey",
+  "homepage": "https://decrn.github.io/localsurvey",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
