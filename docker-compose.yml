@@ -2,24 +2,24 @@
 version: '3'
 
 services:
-    start:
-        build: .
-        image: localsurvey
-        container_name: localsurvey-start
-        command: npm run start
-        ports:
-            - '127.0.0.1:3000:3000'
+  start:
+    build: .
+    image: localsurvey
+    container_name: localsurvey-start
+    command: npm run start
+    ports:
+      - '127.0.0.1:3000:3000'
 
-    test:
-        build: .
-        image: localsurvey
-        container_name: localsurvey-test
-        command: npm run test
+  test:
+    build: .
+    image: localsurvey
+    container_name: localsurvey-test
+    command: npm run test
 
-    build:
-        build: .
-        image: localsurvey
-        container_name: localsurvey-build
-        command: npm run build
-        volumes:
-            - ./build/docker:/app/build
+  build:
+    build: .
+    image: localsurvey
+    container_name: localsurvey-build
+    command: npm run build
+    volumes:
+      - ./build/docker:/app/build

@@ -1,18 +1,18 @@
 ---
 services:
-    - docker
+  - docker
 
 before_script:
-    - docker-compose build
+  - docker-compose build
 
 script:
-    - docker-compose run test
-    - docker-compose run build
+  - docker-compose run test
+  - docker-compose run build
 
 deploy:
-    provider: pages
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    local_dir: ./build/docker
-    on:
-        branch: master
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: ./build/docker
+  on:
+    branch: master
