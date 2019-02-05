@@ -27,7 +27,7 @@ export class HomepageContainer extends Component {
         };
 
         return (
-            <Layout>
+            <Layout style={{ height: '100%' }}>
                 <Header>
                     <div className="logo">
                         <h1>Localsurvey</h1>
