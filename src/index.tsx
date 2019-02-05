@@ -5,13 +5,16 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
 import { createStore } from 'redux';
-import { store } from './state';
+import { store, history } from './state';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ConnectedRouter } from 'connected-react-router';
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer />
+        <ConnectedRouter history={history}>
+            <AppContainer />
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),
 );

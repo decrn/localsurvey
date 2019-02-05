@@ -1,13 +1,18 @@
-import { CounterState, counterReducer } from './counter/counter.reducer';
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { createBrowserHistory, History } from 'history';
+import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { counterReducer, CounterState } from './counter/counter.reducer';
 
 export interface AppState {
     counterState: CounterState;
 }
 
-export const reducers = {
+export const reducers = (history: History<any>) => ({
     counterState: counterReducer,
-};
+    router: connectRouter(history),
+});
 
-export const store = createStore(combineReducers(reducers), composeWithDevTools());
+export const history = createBrowserHistory();
+
+export const store = createStore(combineReducers(reducers(history)), composeWithDevTools());
