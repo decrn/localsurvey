@@ -6,6 +6,7 @@
   "dependencies": {
     "@craco/craco": "^3.4.0",
     "antd": "^3.13.0",
+    "connected-react-router": "^6.2.2",
     "craco-antd": "^1.10.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
