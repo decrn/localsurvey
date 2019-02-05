@@ -18,25 +18,19 @@ export class SurveyListComponent extends Component<SurveyListComponentProps> {
                 title: 'Survey name',
                 dataIndex: 'name',
                 key: 'name',
-                render: (text: any) => {
-                    text;
-                },
+                render: (text: any) => text,
             },
             {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: (text: any) => {
-                    text;
-                },
+                render: (text: any) => text,
             },
             {
                 title: 'Last edited at',
                 dataIndex: 'lastEditedAt',
                 key: 'lastEditedAt',
-                render: (text: any) => {
-                    text;
-                },
+                render: (text: any) => text,
             },
         ];
         return <Table dataSource={items} columns={columns} />;
