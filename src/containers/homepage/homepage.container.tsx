@@ -1,6 +1,6 @@
+import { Layout } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
 import { SurveyListComponent } from './survey-list.component';
 
 const { Header, Footer, Sider, Content } = Layout;
