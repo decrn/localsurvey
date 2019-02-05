@@ -4,10 +4,12 @@
         "max-line-length": [true, 140],
         "indent": [true, "spaces", 4],
         "ter-indent": [false, 4],
-        "import-name": [true, { "react": "React", "react-dom": "ReactDOM" }],
+        "import-name": [false],
         "ter-arrow-parens": [false],
         "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
         "semicolon": [true, "always", "ignore-bound-class-methods"],
-        "align": false
+        "align": false,
+        "no-unused-variable": true,
+        "ordered-imports": true
     }
 }
