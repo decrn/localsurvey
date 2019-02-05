@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && cp build/index.html build/404.html",
     "test": "jest",
     "tslint": "tslint -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",
