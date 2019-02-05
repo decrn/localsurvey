@@ -13,6 +13,6 @@ export const reducers = (history: History<any>) => ({
     router: connectRouter(history),
 });
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({ basename: 'localsurvey' });
 
 export const store = createStore(combineReducers(reducers(history)), composeWithDevTools());
