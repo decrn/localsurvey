@@ -6,6 +6,7 @@
   "dependencies": {
     "@craco/craco": "^3.4.0",
     "antd": "^3.13.0",
+    "connected-react-router": "^6.2.2",
     "craco-antd": "^1.10.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -35,7 +36,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && cp build/index.html build/404.html",
     "test": "jest",
     "tslint": "tslint -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json './src/**/*.{ts,tsx}'",

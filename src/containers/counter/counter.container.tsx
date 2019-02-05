@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Button } from 'antd';
-import { Dispatch } from 'redux';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { AppState } from '../../state';
-import { IncrementCounterAction, CounterActionType } from '../../state/counter/counter.actions';
+import { DecrementCounterAction, IncrementCounterAction } from '../../state/counter/counter.actions';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 
 export interface CounterContainerDispatchProps {
-    onIncrement: (amount: number, amount2: number) => void;
+    onIncrement: (amount?: number) => void;
+    onDecrement: (amount?: number) => void;
 }
 
 export interface CounterContainerProps {
@@ -19,7 +20,8 @@ const mapStateToProps = (state: AppState): Partial<CounterContainerProps> => ({
 });
 
 const mapDispatchToProps = mappedDispatchProps<CounterContainerDispatchProps>({
-    onIncrement: (amount: number, amount2: number) => new IncrementCounterAction({ amount: amount + amount2 }),
+    onIncrement: (amount?: number) => new IncrementCounterAction({ amount }),
+    onDecrement: (amount?: number) => new DecrementCounterAction({ amount }),
 });
 
 // @ts-ignore // TODO: this could be done in a more elegant way
@@ -29,17 +31,58 @@ const mapDispatchToProps = mappedDispatchProps<CounterContainerDispatchProps>({
 )
 export class CounterContainer extends Component<CounterContainerProps & CounterContainerDispatchProps> {
     render() {
-        const { count, onIncrement } = this.props;
+        const { count } = this.props;
 
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '100px' }}>
-                <div>{count}</div>
-                <div>
-                    <Button onClick={this.onIncrement}>Increment</Button>
+            <Fragment>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Link to="/counter/increment">Increment</Link>
+                    <div style={{ margin: '8px' }} />
+                    <Link to="/counter/decrement">Decrement</Link>
                 </div>
-            </div>
+                <Switch>
+                    <Route
+                        path="/counter/increment"
+                        render={() => (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    padding: '100px',
+                                }}
+                            >
+                                <div>{count}</div>
+                                <div>
+                                    <Button onClick={this.onIncrement}>Increment</Button>
+                                </div>
+                            </div>
+                        )}
+                    />
+                    <Route
+                        path="/counter/decrement"
+                        render={() => (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    padding: '100px',
+                                }}
+                            >
+                                <div>{count}</div>
+                                <div>
+                                    <Button onClick={this.onDecrement}>Decrement</Button>
+                                </div>
+                            </div>
+                        )}
+                    />
+                    <Redirect to="/counter/increment" />
+                </Switch>
+            </Fragment>
         );
     }
 
-    onIncrement = () => this.props.onIncrement(2, 4);
+    onIncrement = () => this.props.onIncrement();
+    onDecrement = () => this.props.onDecrement();
 }

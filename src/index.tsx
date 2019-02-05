@@ -1,17 +1,17 @@
-import './styles/index.less';
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
-// tslint:disable-next-line:import-name
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
-import { createStore } from 'redux';
-import { store } from './state';
-import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { history, store } from './state';
+import './styles/index.less';
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer />
+        <ConnectedRouter history={history}>
+            <AppContainer />
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),
 );

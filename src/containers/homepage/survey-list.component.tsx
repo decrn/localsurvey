@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table'; // Figure this import out
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AppState } from '../../state';
 
