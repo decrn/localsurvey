@@ -1,11 +1,10 @@
+import { Button } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
-import { Dispatch } from 'redux';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { AppState } from '../../state';
-import { IncrementCounterAction, CounterActionType, DecrementCounterAction } from '../../state/counter/counter.actions';
+import { DecrementCounterAction, IncrementCounterAction } from '../../state/counter/counter.actions';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
 
 export interface CounterContainerDispatchProps {
     onIncrement: (amount?: number) => void;
@@ -32,7 +31,7 @@ const mapDispatchToProps = mappedDispatchProps<CounterContainerDispatchProps>({
 )
 export class CounterContainer extends Component<CounterContainerProps & CounterContainerDispatchProps> {
     render() {
-        const { count, onIncrement } = this.props;
+        const { count } = this.props;
 
         return (
             <Fragment>
