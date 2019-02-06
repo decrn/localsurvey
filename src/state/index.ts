@@ -19,4 +19,27 @@ export const reducers = (history: History<any>): { [key in keyof AppState]: Redu
 
 export const history = createBrowserHistory({ basename: 'localsurvey' });
 
-export const store = createStore(combineReducers(reducers(history)), composeWithDevTools());
+// Define a preloadedState for createStore()
+// See: https://redux.js.org/recipes/structuring-reducers/initializing-state
+const preloadedState: any = {
+    homepageState: {
+        surveys: [
+            {
+                key: '1',
+                name: 'Zoo visit questionnaire',
+                createdAt: 1549238929,
+                modifiedAt: 1549325329,
+                questionCount: 7,
+            },
+            {
+                key: '2',
+                name: 'Shopping preferences survey',
+                createdAt: 1547049812,
+                modifiedAt: 1547827412,
+                questionCount: 3,
+            },
+        ],
+    },
+};
+
+export const store = createStore(combineReducers(reducers(history)), preloadedState, composeWithDevTools());
