@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Survey } from '../../common/types/survey';
 import { AppState } from '../../state';
+import './homepage.container.less';
 import { SurveyListComponent } from './survey-list.component';
 
 const { Header, Footer, Content } = Layout;
@@ -22,14 +23,14 @@ export class HomepageContainer extends Component<HomepageContainerProps> {
         const { surveys } = this.props;
 
         return (
-            <Layout style={{ height: '100%' }}>
+            <Layout className="layout">
                 <Header>
-                    <div className="logo">
+                    <div>
                         <h1>Localsurvey</h1>
                     </div>
                 </Header>
-                <Content style={{ padding: '50px 50px 0' }}>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                <Content className="content">
+                    <div className="content-wrapper">
                         <h1>Localsurvey</h1>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolor, ipsa quas omnis
