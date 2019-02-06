@@ -1,30 +1,25 @@
 import { Layout } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Survey } from '../../common/types/survey';
+import { AppState } from '../../state';
 import { SurveyListComponent } from './survey-list.component';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-export class HomepageContainer extends Component {
+export interface HomepageContainerProps {
+    surveys: Survey[];
+}
+
+const mapStateToProps = (state: AppState): Partial<HomepageContainerProps> => ({
+    surveys: state.homepageState.surveys,
+});
+
+// @ts-ignore
+@connect(mapStateToProps)
+export class HomepageContainer extends Component<HomepageContainerProps> {
     render() {
-        const data = {
-            surveys: [
-                {
-                    name: 'Example Survey',
-                    createdAt: 0,
-                    lastEditedAt: 20,
-                    questionCount: 5,
-                    key: '0',
-                },
-                {
-                    name: 'Example Survey',
-                    createdAt: 0,
-                    lastEditedAt: 20,
-                    questionCount: 5,
-                    key: '1',
-                },
-            ],
-        };
+        const { surveys } = this.props;
 
         return (
             <Layout style={{ height: '100%' }}>
@@ -41,7 +36,7 @@ export class HomepageContainer extends Component {
                             eligendi hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid
                             similique sunt corporis consequuntur nam quis!
                         </p>
-                        <SurveyListComponent items={data.surveys} />
+                        <SurveyListComponent items={surveys} />
                     </div>
                 </Content>
                 <Footer>
