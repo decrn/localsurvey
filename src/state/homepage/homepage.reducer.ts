@@ -1,4 +1,4 @@
-import { Survey } from '../../common/types/survey';
+import { Survey } from '../../common/types/survey.type';
 
 export interface HomepageState {
     surveys: Survey[];

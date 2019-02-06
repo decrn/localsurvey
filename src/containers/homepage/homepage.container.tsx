@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Survey } from '../../common/types/survey';
+import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import './homepage.container.less';
 import { SurveyListComponent } from './survey-list.component';
