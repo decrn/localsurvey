@@ -1,4 +1,5 @@
 import { ConnectedRouter } from 'connected-react-router';
+import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +7,8 @@ import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
 import { history, store } from './state';
 import './styles/index.less';
+
+dotenv.config();
 
 ReactDOM.render(
     <Provider store={store}>
