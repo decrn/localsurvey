@@ -7,15 +7,28 @@ import { AppState } from './index';
 // See: https://redux.js.org/recipes/structuring-reducers/initializing-state
 
 export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
-    [Environment.Production]: {},
+    [Environment.Production]: {
+        homepageState: {
+            surveys: [
+                {
+                    key: uuid(), // https://www.npmjs.com/package/uuid
+                    name: "Papa John's Innately Interesting Inquiry",
+                    createdAt: 1542225329,
+                    modifiedAt: 1549233329,
+                    questionCount: 11,
+                    status: 'published',
+                },
+            ],
+        },
+    },
     [Environment.Development]: {
         homepageState: {
             surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
-                    createdAt: 1549233329,
-                    modifiedAt: 1542225329,
+                    createdAt: 1542225329,
+                    modifiedAt: 1549233329,
                     questionCount: 11,
                     status: 'published',
                 },
