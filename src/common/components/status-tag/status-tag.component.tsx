@@ -8,7 +8,7 @@ export interface StatusTagProps {
 }
 
 export class StatusTag extends Component<StatusTagProps> {
-    private mapStatusToTooltip(status: SurveyStatus): string {
+    mapStatusToTooltip = (status: SurveyStatus): string => {
         switch (status) {
             case SurveyStatus.Published:
                 return 'This surrvey has been published';
@@ -19,10 +19,10 @@ export class StatusTag extends Component<StatusTagProps> {
             case SurveyStatus.Warning:
                 return 'This survey needs reviewing';
         }
-    }
+    };
 
     // See: https://ant.design/components/icon/
-    private mapStatusToIcon(status: SurveyStatus): string {
+    mapStatusToIcon = (status: SurveyStatus): string => {
         switch (status) {
             case SurveyStatus.Published:
                 return 'check';
@@ -33,7 +33,7 @@ export class StatusTag extends Component<StatusTagProps> {
             case SurveyStatus.Warning:
                 return 'warning';
         }
-    }
+    };
 
     render() {
         const { status } = this.props;
