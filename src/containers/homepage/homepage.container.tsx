@@ -5,7 +5,7 @@ import { Survey } from '../../common/types/survey';
 import { AppState } from '../../state';
 import { SurveyListComponent } from './survey-list.component';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 export interface HomepageContainerProps {
     surveys: Survey[];

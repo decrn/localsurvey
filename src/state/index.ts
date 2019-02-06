@@ -2,6 +2,7 @@ import { connectRouter, RouterState } from 'connected-react-router';
 import { createBrowserHistory, History } from 'history';
 import { combineReducers, createStore, Reducer } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import * as uuid from 'uuid/v4';
 import { counterReducer, CounterState } from './counter/counter.reducer';
 import { homepageReducer, HomepageState } from './homepage/homepage.reducer';
 
@@ -25,14 +26,14 @@ const preloadedState: any = {
     homepageState: {
         surveys: [
             {
-                key: '1',
+                key: uuid.default(), // https://www.npmjs.com/package/uuid
                 name: 'Zoo visit questionnaire',
                 createdAt: 1549238929,
                 modifiedAt: 1549325329,
                 questionCount: 7,
             },
             {
-                key: '2',
+                key: uuid.default(),
                 name: 'Shopping preferences survey',
                 createdAt: 1547049812,
                 modifiedAt: 1547827412,
