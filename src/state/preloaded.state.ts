@@ -1,6 +1,6 @@
 import { DeepPartial } from 'redux';
 import uuid from 'uuid/v4';
-import { AppState } from '.';
+import { AppState } from './index';
 
 // Define a preloadedState for createStore()
 // See: https://redux.js.org/recipes/structuring-reducers/initializing-state
