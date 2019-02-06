@@ -1,12 +1,9 @@
 import { Table } from 'antd';
-import { ColumnProps } from 'antd/lib/table'; // Figure this import out
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { AppState } from '../../state';
+import { Survey } from '../../common/types/survey';
 
 export interface SurveyListComponentProps {
-    items: any[];
+    items: Survey[];
 }
 
 // TODO: display some data
@@ -24,12 +21,19 @@ export class SurveyListComponent extends Component<SurveyListComponentProps> {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: (text: any) => text,
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+                render: (date: number) => new Date(date * 1000).toLocaleDateString(),
             },
             {
-                title: 'Last edited at',
-                dataIndex: 'lastEditedAt',
-                key: 'lastEditedAt',
+                title: 'Modified at',
+                dataIndex: 'modifiedAt',
+                key: 'modifiedAt',
+                render: (date: number) => new Date(date * 1000).toLocaleDateString(),
+            },
+            {
+                title: 'Question count',
+                dataIndex: 'questionCount',
+                key: 'questionCount',
                 render: (text: any) => text,
             },
         ];
