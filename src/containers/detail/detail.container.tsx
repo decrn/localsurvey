@@ -35,12 +35,15 @@ export class DetailContainer extends Component<DetailContainerProps> {
 
     render() {
         const { survey, modalVisible } = this.props;
+
+        // TODO: show actual data in these forms
         const generalFormElement = React.createElement(this.props.generalForm);
         const brandingFormElement = React.createElement(this.props.brandingForm);
 
         return (
             <>
                 {/* TODO: modal state doesn't toggle */}
+                {/* TODO: disable save button when input is not valid (see BrandingForm) */}
                 <Modal
                     title="Edit"
                     visible={modalVisible}

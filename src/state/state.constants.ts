@@ -11,6 +11,15 @@ comparandam et cognitionem habent faciliorem. Duo Reges: constructio interrete. 
 posse se vivere? Cur tantas regiones barbarorum pedibus obiit, tot maria transmisit? Bonum incolumis acies:
 misera caecitas. Cur tantas regiones barbarorum pedibus obiit, tot maria transmisit?`;
 
+const exampleBranding = {
+    introductionMessage: '',
+    logoUrl: '',
+    organisationName: 'Organisation',
+    accentColor: '#2196f3',
+    footerText: '',
+    completionMessage: '',
+};
+
 // Define a preloadedState for createStore()
 // See: https://redux.js.org/recipes/structuring-reducers/initializing-state
 
@@ -26,6 +35,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549233329,
                     questionCount: 11,
                     status: 'published',
+                    branding: exampleBranding,
                 },
             ],
         },
@@ -38,6 +48,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                 modifiedAt: 1549233329,
                 questionCount: 11,
                 status: SurveyStatus.InProgress,
+                branding: exampleBranding,
             },
         },
     },
@@ -52,6 +63,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549233329,
                     questionCount: 11,
                     status: 'published',
+                    branding: exampleBranding,
                 },
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -61,6 +73,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549325329,
                     questionCount: 7,
                     status: 'warning',
+                    branding: exampleBranding,
                 },
                 {
                     key: uuid(),
@@ -70,6 +83,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1547827412,
                     questionCount: 3,
                     status: 'inprogress',
+                    branding: exampleBranding,
                 },
                 {
                     key: uuid(),
@@ -79,6 +93,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1522827412,
                     questionCount: 5,
                     status: 'cancelled',
+                    branding: exampleBranding,
                 },
             ],
         },
@@ -92,6 +107,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                 questionCount: 11,
                 // TODO: why do I need to use the enum here, while string is fine for homepage?
                 status: SurveyStatus.InProgress,
+                branding: exampleBranding,
             },
         },
     },

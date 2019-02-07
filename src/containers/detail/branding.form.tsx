@@ -3,7 +3,9 @@ import Form, { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { ColorPicker } from '../../common/components/color-picker/color-picker.component';
+import { AppState } from '../../state';
 
 const hasErrors = (fieldsError: any): boolean => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -18,6 +20,17 @@ export interface BrandingFormProps extends FormComponentProps {
     completionMessage: string;
 }
 
+const mapStateToProps = (state: AppState): Partial<BrandingFormProps> => ({
+    introductionMessage: state.detailState.survey.branding.introductionMessage,
+    logoUrl: state.detailState.survey.branding.logoUrl,
+    organisationName: state.detailState.survey.branding.organisationName,
+    accentColor: state.detailState.survey.branding.accentColor,
+    footerText: state.detailState.survey.branding.footerText,
+    completionMessage: state.detailState.survey.branding.completionMessage,
+});
+
+// @ts-ignore
+@connect(mapStateToProps)
 export class BrandingForm extends Component<BrandingFormProps, any> {
     componentDidMount() {
         // To disabled submit button at the beginning.
