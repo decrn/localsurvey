@@ -1,5 +1,6 @@
-import { Button, Col, Icon, Row, Table } from 'antd';
+import { Button, Col, Icon, Row, Table, Tooltip } from 'antd';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
@@ -69,10 +70,14 @@ export class SurveyListComponent extends Component<SurveyListComponentProps> {
                         <h2>Surveys</h2>
                     </Col>
                     <Col span={12}>
-                        <Button type="primary" text-align="right" style={{ float: 'right' }}>
-                            <Icon type="plus" />
-                            New survey
-                        </Button>
+                        <Link to="/survey/new">
+                            <Tooltip placement="left" title="Create a new survey">
+                                <Button type="primary" style={{ float: 'right' }}>
+                                    <Icon type="plus" />
+                                    New survey
+                                </Button>
+                            </Tooltip>
+                        </Link>
                     </Col>
                 </Row>
                 <Table dataSource={items} columns={columns} bordered />

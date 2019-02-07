@@ -43,7 +43,7 @@ export class StatusTag extends Component<StatusTagProps> {
         const icon = this.mapStatusToIcon(status);
 
         return (
-            <Tooltip placement="top" title={tooltip}>
+            <Tooltip placement="topLeft" title={tooltip}>
                 <Tag color={color}>
                     <Icon type={icon} />
                 </Tag>
