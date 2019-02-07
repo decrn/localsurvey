@@ -5,18 +5,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { mapStringToEnvironment } from '../common/mappers/environment.mapper';
 import { Environment } from '../common/types/environment.type';
 import { counterReducer, CounterState } from './counter/counter.reducer';
+import { detailReducer, DetailState } from './detail/detail.reducer';
 import { homepageReducer, HomepageState } from './homepage/homepage.reducer';
 import { DEFAULT_STATE } from './state.constants';
 
 export interface AppState {
     counterState: CounterState;
     homepageState: HomepageState;
+    detailState: DetailState;
     router: RouterState;
 }
 
 export const reducers = (history: History<any>): { [key in keyof AppState]: Reducer<any, any> } => ({
     counterState: counterReducer,
     homepageState: homepageReducer,
+    detailState: detailReducer,
     router: connectRouter(history),
 });
 
