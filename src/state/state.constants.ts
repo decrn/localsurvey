@@ -1,6 +1,7 @@
 import { DeepPartial } from 'redux';
 import uuid from 'uuid/v4';
 import { Environment } from '../common/types/environment.type';
+import { SurveyStatus } from '../common/types/survey-status.type';
 import { AppState } from './index';
 
 // Define a preloadedState for createStore()
@@ -8,22 +9,22 @@ import { AppState } from './index';
 
 export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
     [Environment.Production]: {
-        homepageState: {
-            surveys: [
+        surveys: {
+            list: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
                     createdAt: 1542225329,
                     modifiedAt: 1549233329,
                     questionCount: 11,
-                    status: 'published',
+                    status: SurveyStatus.Published,
                 },
             ],
         },
     },
     [Environment.Development]: {
-        homepageState: {
-            surveys: [
+        surveys: {
+            list: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
