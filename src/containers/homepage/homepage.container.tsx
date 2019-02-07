@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import './homepage.container.less';
-import { SurveyListComponent } from './survey-list.component';
+import { SurveyList } from './survey-list.component';
 
 const { Header, Footer, Content } = Layout;
 
@@ -37,7 +37,7 @@ export class HomepageContainer extends Component<HomepageContainerProps> {
                             eligendi hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid
                             similique sunt corporis consequuntur nam quis!
                         </p>
-                        <SurveyListComponent items={surveys} />
+                        <SurveyList items={surveys} />
                     </div>
                 </Content>
                 <Footer>

@@ -5,12 +5,12 @@ import { StatusTag } from '../../common/components/status-tag/status-tag.compone
 import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
 
-export interface SurveyListComponentProps {
+export interface SurveyListProps {
     items: Survey[];
 }
 
 // TODO: display some data
-export class SurveyListComponent extends Component<SurveyListComponentProps> {
+export class SurveyList extends Component<SurveyListProps> {
     render() {
         const { items } = this.props;
         const columns: any = [
