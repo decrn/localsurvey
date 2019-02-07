@@ -1,4 +1,8 @@
 import { Button, Col, Icon, Row, Table, Tooltip } from 'antd';
+import Search from 'antd/lib/input/Search';
+import { RadioChangeEvent } from 'antd/lib/radio';
+import RadioGroup from 'antd/lib/radio/group';
+import RadioButton from 'antd/lib/radio/radioButton';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
@@ -9,10 +13,34 @@ export interface SurveyListProps {
     items: Survey[];
 }
 
-// TODO: display some data
 export class SurveyList extends Component<SurveyListProps> {
+    state = {
+        statusFilter: 'all',
+        search: '',
+        items: this.props.items,
+    };
+
+    filter = (items: Survey[]): Survey[] => {
+        let filteredItems = items;
+
+        const status = this.state.statusFilter;
+        const query = this.state.search;
+
+        if (this.state.statusFilter !== 'all') {
+            filteredItems = filteredItems.filter(item => item.status === status);
+        }
+
+        if (this.state.search) {
+            filteredItems = filteredItems.filter(
+                item => item.name.toLowerCase().indexOf(query.toString().toLowerCase()) > -1,
+            );
+        }
+
+        return filteredItems;
+    };
+
     render() {
-        const { items } = this.props;
+        const { items } = this.state;
         const columns: any = [
             {
                 title: 'Status',
@@ -31,7 +59,6 @@ export class SurveyList extends Component<SurveyListProps> {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
                 render: (date: number) => new Date(date * 1000).toLocaleString(),
             },
             {
@@ -44,7 +71,7 @@ export class SurveyList extends Component<SurveyListProps> {
                 title: 'Question count',
                 dataIndex: 'questionCount',
                 key: 'questionCount',
-                render: (text: any) => text,
+                render: (count: number) => count,
             },
             {
                 title: 'Actions',
@@ -63,6 +90,7 @@ export class SurveyList extends Component<SurveyListProps> {
                 ),
             },
         ];
+
         return (
             <>
                 <Row type="flex" justify="space-between">
@@ -80,7 +108,46 @@ export class SurveyList extends Component<SurveyListProps> {
                         </Link>
                     </Col>
                 </Row>
-                <Table dataSource={items} columns={columns} bordered />
+                <Table
+                    dataSource={this.filter(items)}
+                    columns={columns}
+                    bordered
+                    title={() => (
+                        <Row type="flex" justify="space-between">
+                            <Col span={16}>
+                                <span>Filter: &nbsp;</span>
+                                <RadioGroup
+                                    name="status-filter"
+                                    defaultValue="all"
+                                    onChange={(e: RadioChangeEvent) => {
+                                        this.setState({ ...this.state, statusFilter: e.target.value });
+                                    }}
+                                >
+                                    <RadioButton value="all">All</RadioButton>
+                                    {/* TODO: Quit hardcoding this mess and use the survey-status.type */}
+                                    <RadioButton value="published">
+                                        <Icon type="check" /> Published
+                                    </RadioButton>
+                                    <RadioButton value="inprogress">
+                                        <Icon type="clock-circle" /> Drafts
+                                    </RadioButton>
+                                    <RadioButton value="cancelled">
+                                        <Icon type="stop" /> Cancelled
+                                    </RadioButton>
+                                </RadioGroup>
+                            </Col>
+                            <Col span={8}>
+                                <Search
+                                    style={{ float: 'right' }}
+                                    placeholder="input search text"
+                                    onChange={e => this.setState({ ...this.state, search: e.target.value })}
+                                    enterButton
+                                    allowClear
+                                />
+                            </Col>
+                        </Row>
+                    )}
+                />
             </>
         );
     }
