@@ -1,4 +1,4 @@
-import { Button, Table } from 'antd';
+import { Button, Col, Icon, Row, Table } from 'antd';
 import React, { Component } from 'react';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyStatus } from '../../common/types/survey-status.type';
@@ -62,6 +62,21 @@ export class SurveyListComponent extends Component<SurveyListComponentProps> {
                 ),
             },
         ];
-        return <Table dataSource={items} columns={columns} bordered />;
+        return (
+            <>
+                <Row type="flex" justify="space-between">
+                    <Col span={12}>
+                        <h2>Surveys</h2>
+                    </Col>
+                    <Col span={12}>
+                        <Button type="primary" text-align="right" style={{ float: 'right' }}>
+                            <Icon type="plus" />
+                            New survey
+                        </Button>
+                    </Col>
+                </Row>
+                <Table dataSource={items} columns={columns} bordered />
+            </>
+        );
     }
 }

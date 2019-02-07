@@ -11,7 +11,7 @@ export class StatusTag extends Component<StatusTagProps> {
     mapStatusToTooltip = (status: SurveyStatus): string => {
         switch (status) {
             case SurveyStatus.Published:
-                return 'This surrvey has been published';
+                return 'This survey has been published';
             case SurveyStatus.InProgress:
                 return 'This survey is a draft';
             case SurveyStatus.Cancelled:
