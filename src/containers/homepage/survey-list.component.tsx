@@ -32,13 +32,13 @@ export class SurveyList extends Component<SurveyListProps> {
                 dataIndex: 'createdAt',
                 key: 'createdAt',
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
-                render: (date: number) => new Date(date * 1000).toLocaleDateString(),
+                render: (date: number) => new Date(date * 1000).toLocaleString(),
             },
             {
                 title: 'Last modified at',
                 dataIndex: 'modifiedAt',
                 key: 'modifiedAt',
-                render: (date: number) => new Date(date * 1000).toLocaleDateString(),
+                render: (date: number) => new Date(date * 1000).toLocaleString(),
             },
             {
                 title: 'Question count',
