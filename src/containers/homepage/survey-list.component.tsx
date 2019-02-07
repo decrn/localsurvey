@@ -139,7 +139,7 @@ export class SurveyList extends Component<SurveyListProps> {
                             <Col span={8}>
                                 <Search
                                     style={{ float: 'right' }}
-                                    placeholder="input search text"
+                                    placeholder="Search surveys..."
                                     onChange={e => this.setState({ ...this.state, search: e.target.value })}
                                     enterButton
                                     allowClear
