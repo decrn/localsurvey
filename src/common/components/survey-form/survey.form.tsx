@@ -1,11 +1,7 @@
-import { Button, Input } from 'antd';
+import { Input } from 'antd';
 import Form, { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import React, { Component } from 'react';
-
-const hasErrors = (fieldsError: any): boolean => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-};
 
 export interface SurveyFormProps extends FormComponentProps {
     name: string;
@@ -29,20 +25,25 @@ export class SurveyForm extends Component<SurveyFormProps, any> {
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        const getValidateStatus = (name: string) => isFieldTouched(name) && getFieldError(name);
 
         // Only show error after a field is touched.
-        const nameError = isFieldTouched('name') && getFieldError('name');
-        const descriptionError = isFieldTouched('description') && getFieldError('description');
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem validateStatus={nameError ? 'error' : ''} help={nameError || ''}>
+                <FormItem
+                    validateStatus={getValidateStatus('name') ? 'error' : ''}
+                    help={getValidateStatus('name') || ''}
+                >
                     {getFieldDecorator('name', {
                         rules: [{ required: true, message: 'Please input a name!' }],
                     })(<Input placeholder="Name" />)}
                 </FormItem>
 
-                <FormItem validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
+                <FormItem
+                    validateStatus={getValidateStatus('description') ? 'error' : ''}
+                    help={getValidateStatus('description') || ''}
+                >
                     {getFieldDecorator('description', {
                         rules: [{ required: true, message: 'Please input a description!' }],
                     })(<Input placeholder="Description" />)}
