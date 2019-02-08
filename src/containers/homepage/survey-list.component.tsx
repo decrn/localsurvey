@@ -6,6 +6,7 @@ import RadioButton from 'antd/lib/radio/radioButton';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
+import { mapStatusToIcon } from '../../common/mappers/survey-status.mapper';
 import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
 
@@ -20,23 +21,17 @@ export class SurveyList extends Component<SurveyListProps> {
         items: this.props.items,
     };
 
-    filter = (items: Survey[]): Survey[] => {
-        let filteredItems = items;
-
-        const { statusFilter, search } = this.state;
-
-        if (statusFilter !== 'all') {
-            filteredItems = filteredItems.filter(item => item.status === statusFilter);
-        }
-
-        if (search) {
-            filteredItems = filteredItems.filter(
-                item => item.name.toLowerCase().indexOf(search.toString().toLowerCase()) > -1,
-            );
-        }
-
-        return filteredItems;
+    matchesStatus = (survey: Survey): boolean => {
+        const { statusFilter } = this.state;
+        return statusFilter === 'all' ? true : survey.status === statusFilter;
     };
+
+    matchesSearchQuery = (survey: Survey): boolean => {
+        const { search } = this.state;
+        return search === '' ? true : survey.name.toLowerCase().indexOf(search.toString().toLowerCase()) > -1;
+    };
+
+    filter = (items: Survey[]): Survey[] => items.filter(this.matchesStatus).filter(this.matchesSearchQuery);
 
     render() {
         const { items } = this.state;
@@ -123,15 +118,14 @@ export class SurveyList extends Component<SurveyListProps> {
                                     }}
                                 >
                                     <RadioButton value="all">All</RadioButton>
-                                    {/* TODO: Quit hardcoding this mess and use the survey-status.type */}
-                                    <RadioButton value="published">
-                                        <Icon type="check" /> Published
+                                    <RadioButton value={SurveyStatus.Published}>
+                                        <Icon type={mapStatusToIcon(SurveyStatus.Published)} /> Published
                                     </RadioButton>
-                                    <RadioButton value="inprogress">
-                                        <Icon type="clock-circle" /> Drafts
+                                    <RadioButton value={SurveyStatus.InProgress}>
+                                        <Icon type={mapStatusToIcon(SurveyStatus.InProgress)} /> Drafts
                                     </RadioButton>
-                                    <RadioButton value="cancelled">
-                                        <Icon type="stop" /> Cancelled
+                                    <RadioButton value={SurveyStatus.Cancelled}>
+                                        <Icon type={mapStatusToIcon(SurveyStatus.Cancelled)} /> Cancelled
                                     </RadioButton>
                                 </RadioGroup>
                             </Col>

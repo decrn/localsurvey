@@ -1,6 +1,6 @@
 import { Icon, Tag, Tooltip } from 'antd';
 import React, { Component } from 'react';
-import { mapStatusToColor } from '../../mappers/survey-status.mapper';
+import { mapStatusToColor, mapStatusToIcon } from '../../mappers/survey-status.mapper';
 import { SurveyStatus } from '../../types/survey-status.type';
 
 export interface StatusTagProps {
@@ -20,27 +20,12 @@ export class StatusTag extends Component<StatusTagProps> {
                 return 'This survey needs reviewing';
         }
     };
-
-    // See: https://ant.design/components/icon/
-    mapStatusToIcon = (status: SurveyStatus): string => {
-        switch (status) {
-            case SurveyStatus.Published:
-                return 'check';
-            case SurveyStatus.InProgress:
-                return 'clock-circle';
-            case SurveyStatus.Cancelled:
-                return 'stop';
-            case SurveyStatus.Warning:
-                return 'warning';
-        }
-    };
-
     render() {
         const { status } = this.props;
 
         const color = mapStatusToColor(status);
         const tooltip = this.mapStatusToTooltip(status);
-        const icon = this.mapStatusToIcon(status);
+        const icon = mapStatusToIcon(status);
 
         return (
             <Tooltip placement="topLeft" title={tooltip}>

@@ -13,3 +13,17 @@ export const mapStatusToColor = (status: SurveyStatus): string => {
             return 'volcano';
     }
 };
+
+// See: https://ant.design/components/icon/
+export const mapStatusToIcon = (status: SurveyStatus): string => {
+    switch (status) {
+        case SurveyStatus.Published:
+            return 'check';
+        case SurveyStatus.InProgress:
+            return 'clock-circle';
+        case SurveyStatus.Cancelled:
+            return 'stop';
+        case SurveyStatus.Warning:
+            return 'warning';
+    }
+};
