@@ -23,16 +23,15 @@ export class SurveyList extends Component<SurveyListProps> {
     filter = (items: Survey[]): Survey[] => {
         let filteredItems = items;
 
-        const status = this.state.statusFilter;
-        const query = this.state.search;
+        const { statusFilter, search } = this.state;
 
-        if (this.state.statusFilter !== 'all') {
-            filteredItems = filteredItems.filter(item => item.status === status);
+        if (statusFilter !== 'all') {
+            filteredItems = filteredItems.filter(item => item.status === statusFilter);
         }
 
-        if (this.state.search) {
+        if (search) {
             filteredItems = filteredItems.filter(
-                item => item.name.toLowerCase().indexOf(query.toString().toLowerCase()) > -1,
+                item => item.name.toLowerCase().indexOf(search.toString().toLowerCase()) > -1,
             );
         }
 
