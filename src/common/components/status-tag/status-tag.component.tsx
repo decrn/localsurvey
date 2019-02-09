@@ -3,22 +3,19 @@ import React, { Component, CSSProperties } from 'react';
 import { mapStatusToColor } from '../../mappers/survey-status.mapper';
 import { SurveyStatus } from '../../types/survey-status.type';
 
+declare const StatusTagSizes: ['small', 'medium', 'large'];
+export declare type StatusTagSize = (typeof StatusTagSizes)[number];
+
 export interface StatusTagProps {
     status: SurveyStatus;
     extended?: boolean;
     size?: StatusTagSize;
 }
 
-export enum StatusTagSize {
-    Small = 'small',
-    Medium = 'medium',
-    Large = 'large',
-}
-
 export class StatusTag extends Component<StatusTagProps> {
     static defaultProps: Partial<StatusTagProps> = {
         extended: false,
-        size: StatusTagSize.Medium,
+        size: 'medium',
     };
 
     mapStatusToTooltip = (status: SurveyStatus): string => {
