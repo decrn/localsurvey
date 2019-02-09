@@ -1,6 +1,7 @@
 import { Button, Card, Form, Icon, Modal } from 'antd';
 import React, { Component, ComponentClass } from 'react';
 import { connect } from 'react-redux';
+import { match, RouteComponentProps } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey.form';
 import { Survey } from '../../common/types/survey.type';
@@ -8,15 +9,20 @@ import { AppState } from '../../state';
 import { BrandingForm, BrandingFormProps } from './branding.form';
 import './detail.container.less';
 
+export interface DetailRouteInfo {
+    surveyid: string;
+}
+
 export interface DetailContainerProps {
-    survey: Survey;
+    surveys: Survey[];
+    match: match<DetailRouteInfo>;
     modalVisible: boolean;
     generalForm: ComponentClass<SurveyFormProps>;
     brandingForm: ComponentClass<BrandingFormProps>;
 }
 
 const mapStateToProps = (state: AppState): Partial<DetailContainerProps> => ({
-    survey: state.detailState.survey,
+    surveys: state.homepageState.surveys,
 });
 
 // @ts-ignore
@@ -34,7 +40,14 @@ export class DetailContainer extends Component<DetailContainerProps> {
     };
 
     render() {
-        const { survey, modalVisible } = this.props;
+        const { modalVisible } = this.props;
+
+        // TODO: there has to be a better way to do this
+        let id = Number.parseInt(this.props.match.params.surveyid, 10);
+        if (id === NaN) {
+            id = -1;
+        }
+        const survey = this.props.surveys[id];
 
         // TODO: show actual data in these forms
         const generalFormElement = React.createElement(this.props.generalForm);

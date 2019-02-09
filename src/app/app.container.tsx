@@ -12,7 +12,7 @@ export class AppContainer extends Component {
             <AdminLayoutContainer>
                 <Switch>
                     <Route exact path="/" component={HomepageContainer} />
-                    <Route exact path="/detail" component={DetailContainer} />
+                    <Route exact path="/:surveyid" component={DetailContainer} />
                     <Route path="/counter" component={CounterContainer} />
                     <Route render={() => <div>No routes here</div>} />
                 </Switch>
