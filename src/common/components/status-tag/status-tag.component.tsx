@@ -6,13 +6,19 @@ import { SurveyStatus } from '../../types/survey-status.type';
 export interface StatusTagProps {
     status: SurveyStatus;
     extended?: boolean;
-    size?: string;
+    size?: StatusTagSize;
+}
+
+export enum StatusTagSize {
+    Small = 'small',
+    Medium = 'medium',
+    Large = 'large',
 }
 
 export class StatusTag extends Component<StatusTagProps> {
     static defaultProps: Partial<StatusTagProps> = {
         extended: false,
-        size: 'medium',
+        size: StatusTagSize.Medium,
     };
 
     mapStatusToTooltip = (status: SurveyStatus): string => {
@@ -42,7 +48,7 @@ export class StatusTag extends Component<StatusTagProps> {
         }
     };
 
-    mapSizeToStyle = (size: string): CSSProperties => {
+    mapSizeToStyle = (size: StatusTagSize): CSSProperties => {
         switch (size) {
             case 'small':
                 return { padding: '0px 6px 10px', fontSize: 10 };
