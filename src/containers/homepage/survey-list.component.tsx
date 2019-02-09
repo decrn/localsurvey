@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { mapStatusToIcon } from '../../common/mappers/survey-status.mapper';
 import { SurveyStatus } from '../../common/types/survey-status.type';
-import { Survey } from '../../common/types/survey.type';
+import { Survey, surveyDateToLocaleString } from '../../common/types/survey.type';
 
 export interface SurveyListProps {
     items: Survey[];
@@ -53,13 +53,13 @@ export class SurveyList extends Component<SurveyListProps> {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: (date: number) => new Date(date * 1000).toLocaleString(),
+                render: (date: number) => surveyDateToLocaleString(date),
             },
             {
                 title: 'Last modified at',
                 dataIndex: 'modifiedAt',
                 key: 'modifiedAt',
-                render: (date: number) => new Date(date * 1000).toLocaleString(),
+                render: (date: number) => surveyDateToLocaleString(date),
             },
             {
                 title: 'Question count',
