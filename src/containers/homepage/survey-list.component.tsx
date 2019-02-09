@@ -9,7 +9,8 @@ import { CollapsibleButtons } from '../../common/components/collapsible-buttons/
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { mapStatusToIcon } from '../../common/mappers/survey-status.mapper';
 import { SurveyStatus } from '../../common/types/survey-status.type';
-import { Survey, surveyDateToLocaleString } from '../../common/types/survey.type';
+import { Survey } from '../../common/types/survey.type';
+import { surveyDateToLocaleString } from '../../common/utils/date.utils';
 import './survey-list.component.less';
 
 export interface SurveyListProps {
