@@ -10,13 +10,13 @@ import { surveysReducer, SurveysState } from './surveys/surveys.reducer';
 
 export interface AppState {
     counterState: CounterState;
-    surveys: SurveysState;
+    surveysState: SurveysState;
     router: RouterState;
 }
 
 export const reducers = (history: History<any>): { [key in keyof AppState]: Reducer<any, any> } => ({
     counterState: counterReducer,
-    surveys: surveysReducer,
+    surveysState: surveysReducer,
     router: connectRouter(history),
 });
 

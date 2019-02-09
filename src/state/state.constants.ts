@@ -9,8 +9,8 @@ import { AppState } from './index';
 
 export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
     [Environment.Production]: {
-        surveys: {
-            list: [
+        surveysState: {
+            surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
@@ -23,8 +23,8 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
         },
     },
     [Environment.Development]: {
-        surveys: {
-            list: [
+        surveysState: {
+            surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",

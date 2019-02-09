@@ -1,13 +1,13 @@
 import { Survey } from '../../common/types/survey.type';
 
 export interface SurveysState {
-    list: Survey[];
+    surveys: Survey[];
 }
 
 // Providing initial state as fallback for failed hydrating from the store
 // See https://redux.js.org/recipes/structuring-reducers/initializing-state
 export const initialSurveysState = {
-    list: [],
+    surveys: [],
 };
 
 export function surveysReducer(state: SurveysState = initialSurveysState): SurveysState {
