@@ -1,11 +1,9 @@
-import { Button, Icon, Input } from 'antd';
-import Form, { FormComponentProps, FormCreateOption } from 'antd/lib/form';
+import { Button, Input } from 'antd';
+import Form, { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { ColorPicker } from '../../common/components/color-picker/color-picker.component';
-import { AppState } from '../../state';
 
 const hasErrors = (fieldsError: any): boolean => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -45,7 +43,7 @@ class BrandingFormComponent extends Component<BrandingFormProps & FormComponentP
 
     handleSubmit = (e: any) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(err => {
             if (!err) {
                 // console.log('Received values of form: ', values);
             }

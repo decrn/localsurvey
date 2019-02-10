@@ -1,7 +1,7 @@
-import { Button, Card, Form, Icon, Modal } from 'antd';
+import { Button, Card, Icon, Modal } from 'antd';
 import React, { Component, ComponentClass } from 'react';
 import { connect } from 'react-redux';
-import { match, RouteComponentProps } from 'react-router';
+import { match } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey.form';
 import { Survey } from '../../common/types/survey.type';

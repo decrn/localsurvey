@@ -35,7 +35,7 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
     };
 
     render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        const { getFieldDecorator, getFieldError, isFieldTouched } = this.props.form;
         const getValidateStatus = (name: string) => isFieldTouched(name) && getFieldError(name);
 
         // Only show error after a field is touched.
