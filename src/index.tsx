@@ -11,9 +11,9 @@ import './styles/index.less';
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            {' '}
-            {/* See: https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md */}
             <ConnectedRouter history={history}>
+                {' '}
+                {/* See: https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md */}
                 <AppContainer />
             </ConnectedRouter>
         </PersistGate>
