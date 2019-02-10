@@ -9,9 +9,13 @@ import './styles/index.less';
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <AppContainer />
-        </ConnectedRouter>
+        <PersistGate loading={null} persistor={null}>
+            {' '}
+            {/* See: https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md */}
+            <ConnectedRouter history={history}>
+                <AppContainer />
+            </ConnectedRouter>
+        </PersistGate>
     </Provider>,
     document.getElementById('root'),
 );
