@@ -5,12 +5,12 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
-import { history, store } from './state';
+import { history, persistor, store } from './state';
 import './styles/index.less';
 
 ReactDOM.render(
     <Provider store={store}>
-        <PersistGate loading={null} persistor={null}>
+        <PersistGate loading={null} persistor={persistor}>
             {' '}
             {/* See: https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md */}
             <ConnectedRouter history={history}>
