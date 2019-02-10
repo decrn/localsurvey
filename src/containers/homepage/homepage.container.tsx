@@ -25,13 +25,10 @@ export class HomepageContainer extends Component<HomepageContainerProps> {
         return (
             <Layout className="layout">
                 <Header>
-                    <div>
-                        <h1>Localsurvey</h1>
-                    </div>
+                    <h1>Localsurvey</h1>
                 </Header>
-                <Content className="content">
-                    <div className="content-wrapper">
-                        <h1>Localsurvey</h1>
+                <Content className="content-wrapper">
+                    <div className="content">
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolor, ipsa quas omnis
                             eligendi hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid
