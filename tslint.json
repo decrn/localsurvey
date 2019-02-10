@@ -10,6 +10,7 @@
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "align": false,
         "no-unused-variable": true,
-        "ordered-imports": true
+        "ordered-imports": true,
+        "variable-name": false
     }
 }

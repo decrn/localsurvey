@@ -20,6 +20,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     status: SurveyStatus.Published,
                 },
             ],
+            filter: 'all',
         },
     },
     [Environment.Development]: {
@@ -58,6 +59,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     status: SurveyStatus.Cancelled,
                 },
             ],
+            filter: 'all',
         },
     },
 };
