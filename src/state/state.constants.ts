@@ -1,6 +1,7 @@
 import { DeepPartial } from 'redux';
 import uuid from 'uuid/v4';
 import { Environment } from '../common/types/environment.type';
+import { SurveyStatus } from '../common/types/survey-status.type';
 import { AppState } from './index';
 
 // Define a preloadedState for createStore()
@@ -8,7 +9,7 @@ import { AppState } from './index';
 
 export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
     [Environment.Production]: {
-        homepageState: {
+        surveysState: {
             surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -16,13 +17,13 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1542225329,
                     modifiedAt: 1549233329,
                     questionCount: 11,
-                    status: 'published',
+                    status: SurveyStatus.Published,
                 },
             ],
         },
     },
     [Environment.Development]: {
-        homepageState: {
+        surveysState: {
             surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -30,7 +31,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1542225329,
                     modifiedAt: 1549233329,
                     questionCount: 11,
-                    status: 'published',
+                    status: SurveyStatus.Published,
                 },
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -38,7 +39,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1549238929,
                     modifiedAt: 1549325329,
                     questionCount: 7,
-                    status: 'warning',
+                    status: SurveyStatus.Warning,
                 },
                 {
                     key: uuid(),
@@ -46,7 +47,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1547049812,
                     modifiedAt: 1547827412,
                     questionCount: 3,
-                    status: 'inprogress',
+                    status: SurveyStatus.InProgress,
                 },
                 {
                     key: uuid(),
@@ -54,7 +55,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1511049812,
                     modifiedAt: 1522827412,
                     questionCount: 5,
-                    status: 'cancelled',
+                    status: SurveyStatus.Cancelled,
                 },
             ],
         },
