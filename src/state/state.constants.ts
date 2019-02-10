@@ -25,7 +25,7 @@ const exampleBranding = {
 
 export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
     [Environment.Production]: {
-        homepageState: {
+        surveysState: {
             surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -34,26 +34,14 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1542225329,
                     modifiedAt: 1549233329,
                     questionCount: 11,
-                    status: 'published',
+                    status: SurveyStatus.Published,
                     branding: exampleBranding,
                 },
             ],
         },
-        detailState: {
-            survey: {
-                key: uuid(), // https://www.npmjs.com/package/uuid
-                name: "Papa John's Innately Interesting Inquiry",
-                description: exampleDescription,
-                createdAt: 1542225329,
-                modifiedAt: 1549233329,
-                questionCount: 11,
-                status: SurveyStatus.InProgress,
-                branding: exampleBranding,
-            },
-        },
     },
     [Environment.Development]: {
-        homepageState: {
+        surveysState: {
             surveys: [
                 {
                     key: uuid(), // https://www.npmjs.com/package/uuid
@@ -62,7 +50,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1542225329,
                     modifiedAt: 1549233329,
                     questionCount: 11,
-                    status: 'published',
+                    status: SurveyStatus.Published,
                     branding: exampleBranding,
                 },
                 {
@@ -72,7 +60,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1549238929,
                     modifiedAt: 1549325329,
                     questionCount: 7,
-                    status: 'warning',
+                    status: SurveyStatus.Warning,
                     branding: exampleBranding,
                 },
                 {
@@ -82,7 +70,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1547049812,
                     modifiedAt: 1547827412,
                     questionCount: 3,
-                    status: 'inprogress',
+                    status: SurveyStatus.InProgress,
                     branding: exampleBranding,
                 },
                 {
@@ -92,23 +80,10 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     createdAt: 1511049812,
                     modifiedAt: 1522827412,
                     questionCount: 5,
-                    status: 'cancelled',
+                    status: SurveyStatus.Cancelled,
                     branding: exampleBranding,
                 },
             ],
-        },
-        detailState: {
-            survey: {
-                key: uuid(), // https://www.npmjs.com/package/uuid
-                name: "Papa John's Innately Interesting Inquiry",
-                description: exampleDescription,
-                createdAt: 1542225329,
-                modifiedAt: 1549233329,
-                questionCount: 11,
-                // TODO: why do I need to use the enum here, while string is fine for homepage?
-                status: SurveyStatus.InProgress,
-                branding: exampleBranding,
-            },
         },
     },
 };

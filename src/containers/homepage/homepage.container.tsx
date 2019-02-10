@@ -12,7 +12,7 @@ export interface HomepageContainerProps {
 }
 
 const mapStateToProps = (state: AppState): Partial<HomepageContainerProps> => ({
-    surveys: state.homepageState.surveys,
+    surveys: state.surveysState.surveys,
 });
 
 // @ts-ignore
