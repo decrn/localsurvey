@@ -2,6 +2,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/app.container';
 import * as serviceWorker from './app/service-worker';
 import { history, store } from './state';
