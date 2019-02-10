@@ -37,7 +37,6 @@ export class HomepageContainer extends Component<HomepageContainerProps & Homepa
 
         return (
             <>
-                <h1>Localsurvey</h1>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolor, ipsa quas omnis eligendi
                     hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid similique sunt corporis
