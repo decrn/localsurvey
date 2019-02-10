@@ -1,7 +1,7 @@
 import { SurveyStatus } from '../types/survey-status.type';
 
 // See: http://beta.ant.design/components/tag/
-export const mapStatusToColor = (status: SurveyStatus): string => {
+export const mapStatusToColor = (status: SurveyStatus): 'green' | 'yellow' | 'red' | 'volcano' => {
     switch (status) {
         case SurveyStatus.Published:
             return 'green';
@@ -15,7 +15,7 @@ export const mapStatusToColor = (status: SurveyStatus): string => {
 };
 
 // See: https://ant.design/components/icon/
-export const mapStatusToIcon = (status: SurveyStatus): string => {
+export const mapStatusToIcon = (status: SurveyStatus): 'check' | 'clock-circle' | 'stop' | 'warning' => {
     switch (status) {
         case SurveyStatus.Published:
             return 'check';

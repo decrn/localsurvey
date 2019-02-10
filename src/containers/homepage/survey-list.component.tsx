@@ -116,12 +116,12 @@ export class SurveyList extends Component<SurveyListProps> {
                         title={() => (
                             <Row type="flex" justify="space-between">
                                 <Col span={16}>
-                                    <span>Filter: &nbsp;</span>
+                                    <span className="filterText">Filter:</span>
                                     <RadioGroup
                                         name="status-filter"
                                         defaultValue="all"
                                         onChange={(e: RadioChangeEvent) => {
-                                            this.setState({ ...this.state, statusFilter: e.target.value });
+                                            this.setState({ statusFilter: e.target.value });
                                         }}
                                     >
                                         <RadioButton value="all">All</RadioButton>
@@ -140,7 +140,7 @@ export class SurveyList extends Component<SurveyListProps> {
                                     <Search
                                         style={{ float: 'right' }}
                                         placeholder="Search surveys..."
-                                        onChange={e => this.setState({ ...this.state, search: e.target.value })}
+                                        onChange={e => this.setState({ search: e.target.value })}
                                         enterButton
                                         allowClear
                                     />
