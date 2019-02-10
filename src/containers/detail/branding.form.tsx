@@ -1,5 +1,5 @@
 import { Button, Icon, Input } from 'antd';
-import Form, { FormComponentProps } from 'antd/lib/form';
+import Form, { FormComponentProps, FormCreateOption } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { Component } from 'react';
@@ -11,43 +11,50 @@ const hasErrors = (fieldsError: any): boolean => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 };
 
-export interface BrandingFormProps extends FormComponentProps {
-    introductionMessage: string;
-    logoUrl: string;
-    organisationName: string;
-    accentColor: string;
-    footerText: string;
-    completionMessage: string;
+export interface BrandingFormProps {
+    values: {
+        introductionMessage: string;
+        logoUrl: string;
+        organisationName: string;
+        accentColor: string;
+        footerText: string;
+        completionMessage: string;
+    };
 }
 
-const mapStateToProps = (state: AppState): Partial<BrandingFormProps> => ({
-    introductionMessage: state.detailState.survey.branding.introductionMessage,
-    logoUrl: state.detailState.survey.branding.logoUrl,
-    organisationName: state.detailState.survey.branding.organisationName,
-    accentColor: state.detailState.survey.branding.accentColor,
-    footerText: state.detailState.survey.branding.footerText,
-    completionMessage: state.detailState.survey.branding.completionMessage,
-});
+const mapPropsToFields = (props: BrandingFormProps) => {
+    const { introductionMessage, logoUrl, organisationName, accentColor, footerText, completionMessage } = props.values;
 
-// @ts-ignore
-@connect(mapStateToProps)
-export class BrandingForm extends Component<BrandingFormProps, any> {
+    return {
+        introductionMessage: Form.createFormField({ value: introductionMessage }),
+        logoUrl: Form.createFormField({ value: logoUrl }),
+        organisationName: Form.createFormField({ value: organisationName }),
+        accentColor: Form.createFormField({ value: accentColor }),
+        footerText: Form.createFormField({ value: footerText }),
+        completionMessage: Form.createFormField({ value: completionMessage }),
+    };
+};
+
+class BrandingFormComponent extends Component<BrandingFormProps & FormComponentProps> {
     componentDidMount() {
         // To disabled submit button at the beginning.
         this.props.form.validateFields();
+
+        this.props.form.setFieldsValue(this.props.values);
     }
 
     handleSubmit = (e: any) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
             }
         });
     };
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        // TODO: Extract this and others to util file
         const getValidateStatus = (name: string) => isFieldTouched(name) && getFieldError(name);
 
         const formItemLayout = {
@@ -151,3 +158,6 @@ export class BrandingForm extends Component<BrandingFormProps, any> {
         );
     }
 }
+
+// tslint:disable-next-line:variable-name
+export const BrandingForm = Form.create<BrandingFormProps>({ mapPropsToFields })(BrandingFormComponent);

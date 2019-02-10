@@ -30,13 +30,10 @@ const mapStateToProps = (state: AppState): Partial<DetailContainerProps> => ({
 export class DetailContainer extends Component<DetailContainerProps> {
     public static defaultProps = {
         modalVisible: false,
-        generalForm: Form.create()(SurveyForm),
-        brandingForm: Form.create()(BrandingForm),
     };
 
     saveGeneral = () => {
-        this.setState({ ...this.state, modalVisible: false });
-        console.log(this.props.generalForm);
+        this.setState({ modalVisible: false });
     };
 
     render() {
@@ -49,10 +46,6 @@ export class DetailContainer extends Component<DetailContainerProps> {
         }
         const survey = this.props.surveys[id];
 
-        // TODO: show actual data in these forms
-        const generalFormElement = React.createElement(this.props.generalForm);
-        const brandingFormElement = React.createElement(this.props.brandingForm);
-
         return (
             <>
                 {/* TODO: modal state doesn't toggle */}
@@ -60,21 +53,22 @@ export class DetailContainer extends Component<DetailContainerProps> {
                 <Modal
                     title="Edit"
                     visible={modalVisible}
-                    onCancel={() => this.setState({ ...this.state, modalVisible: false })}
+                    onCancel={() => this.setState({ modalVisible: false })}
                     onOk={() => this.saveGeneral()}
                     okText="Save"
                     cancelText="Cancel"
                 >
-                    {generalFormElement}
+                    <SurveyForm
+                        values={{
+                            name: survey.name,
+                            description: survey.description,
+                        }}
+                    />
                 </Modal>
 
                 <h2>
                     {survey.name}{' '}
-                    <Button
-                        shape="circle"
-                        icon="edit"
-                        onClick={() => this.setState({ ...this.state, modalVisible: true })}
-                    />
+                    <Button shape="circle" icon="edit" onClick={() => this.setState({ modalVisible: true })} />
                 </h2>
 
                 <Card
@@ -109,7 +103,9 @@ export class DetailContainer extends Component<DetailContainerProps> {
                     </ul>
                 </Card>
 
-                <Card title="Branding">{brandingFormElement}</Card>
+                <Card title="Branding">
+                    <BrandingForm values={survey.branding} />
+                </Card>
             </>
         );
     }

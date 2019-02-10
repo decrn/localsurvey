@@ -3,12 +3,23 @@ import Form, { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import React, { Component } from 'react';
 
-export interface SurveyFormProps extends FormComponentProps {
-    name: string;
-    description: string;
+export interface SurveyFormProps {
+    values: {
+        name: string;
+        description: string;
+    };
 }
 
-export class SurveyForm extends Component<SurveyFormProps, any> {
+const mapPropsToFields = (props: SurveyFormProps) => {
+    const { name, description } = props.values;
+
+    return {
+        name: Form.createFormField({ value: name }),
+        description: Form.createFormField({ value: description }),
+    };
+};
+
+class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps> {
     componentDidMount() {
         // To disabled submit button at the beginning.
         this.props.form.validateFields();
@@ -18,7 +29,7 @@ export class SurveyForm extends Component<SurveyFormProps, any> {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
             }
         });
     };
@@ -52,3 +63,6 @@ export class SurveyForm extends Component<SurveyFormProps, any> {
         );
     }
 }
+
+// tslint:disable-next-line:variable-name
+export const SurveyForm = Form.create<SurveyFormProps>({ mapPropsToFields })(SurveyFormComponent);
