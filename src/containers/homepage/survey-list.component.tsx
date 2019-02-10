@@ -10,7 +10,7 @@ import { StatusTag } from '../../common/components/status-tag/status-tag.compone
 import { mapStatusToIcon } from '../../common/mappers/survey-status.mapper';
 import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
-import { surveyDateToLocaleString } from '../../common/utils/date.utils';
+import { epochToLocaleString } from '../../common/utils/date.utils';
 import './survey-list.component.less';
 
 export interface SurveyListProps {
@@ -56,13 +56,13 @@ export class SurveyList extends Component<SurveyListProps> {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: (date: number) => surveyDateToLocaleString(date),
+                render: (epoch: number) => epochToLocaleString(epoch),
             },
             {
                 title: 'Last modified at',
                 dataIndex: 'modifiedAt',
                 key: 'modifiedAt',
-                render: (date: number) => surveyDateToLocaleString(date),
+                render: (epoch: number) => epochToLocaleString(epoch),
             },
             {
                 title: 'Question count',
