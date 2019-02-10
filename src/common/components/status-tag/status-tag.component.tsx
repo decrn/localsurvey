@@ -10,6 +10,7 @@ export interface StatusTagProps {
     status: SurveyStatus;
     extended?: boolean;
     size?: StatusTagSize;
+    tooltipPlacement?: 'top' | 'right' | 'left' | 'bottom';
 }
 
 export class StatusTag extends Component<StatusTagProps> {
@@ -58,14 +59,14 @@ export class StatusTag extends Component<StatusTagProps> {
     };
 
     render() {
-        const { status, size, extended } = this.props;
+        const { status, size, extended, tooltipPlacement = 'top' } = this.props;
 
         const color = mapStatusToColor(status);
         const tooltip = this.mapStatusToTooltip(status);
         const icon = this.mapStatusToIcon(status);
 
         return (
-            <Tooltip placement="top" title={tooltip}>
+            <Tooltip placement={tooltipPlacement} title={tooltip}>
                 <Tag style={this.mapSizeToStyle(size!)} color={color}>
                     <Icon type={icon} />
                     {extended ? <span style={{ paddingLeft: '5px' }}>{status}</span> : null}

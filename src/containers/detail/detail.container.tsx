@@ -67,12 +67,22 @@ export class DetailContainer extends Component<DetailContainerProps> {
                 </Modal>
 
                 <h2>
-                    {survey.name}{' '}
-                    <Button shape="circle" icon="edit" onClick={() => this.setState({ modalVisible: true })} />
+                    {survey.name}
+                    <Button
+                        style={{ margin: '0 6px' }}
+                        shape="circle"
+                        icon="edit"
+                        onClick={() => this.setState({ modalVisible: true })}
+                    />
                 </h2>
 
                 <Card
-                    title="General"
+                    title={
+                        <>
+                            <span style={{ marginRight: 12 }}>General</span>
+                            <StatusTag tooltipPlacement="right" status={survey.status} size="medium" extended />
+                        </>
+                    }
                     extra={
                         <>
                             <Button>Survey Builder</Button> <Button>Start surveying</Button>
@@ -83,11 +93,7 @@ export class DetailContainer extends Component<DetailContainerProps> {
 
                     <Button style={{ float: 'right' }}>See results</Button>
 
-                    <ul style={{ listStyleType: 'none' }}>
-                        <li>
-                            {/* TODO: use extended status tag when it's finished */}
-                            <StatusTag status={survey.status} />{' '}
-                        </li>
+                    <ul style={{ listStyleType: 'none', padding: 0 }}>
                         <li>
                             {/* TODO: save this timestamp function as helper or something */}
                             <Icon type="plus-circle" /> <u>Created at:</u>{' '}
