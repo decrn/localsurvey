@@ -50,7 +50,7 @@ export class StatusTag extends Component<StatusTagProps> {
             case 'small':
                 return { padding: '0px 6px 10px', fontSize: 10 };
             case 'large':
-                return { padding: '6px 9px 24px', fontSize: 15 };
+                return { padding: '4px 9px 24px', fontSize: 15 };
             default:
             case 'medium':
                 return { padding: '3px 7px 22px', fontSize: 13 };
