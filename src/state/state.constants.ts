@@ -28,7 +28,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
         surveysState: {
             surveys: [
                 {
-                    key: uuid(), // https://www.npmjs.com/package/uuid
+                    id: uuid(), // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
                     description: exampleDescription,
                     createdAt: 1542225329,
@@ -45,7 +45,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
         surveysState: {
             surveys: [
                 {
-                    key: uuid(), // https://www.npmjs.com/package/uuid
+                    id: 'test', // https://www.npmjs.com/package/uuid
                     name: "Papa John's Innately Interesting Inquiry",
                     description: exampleDescription,
                     createdAt: 1542225329,
@@ -55,7 +55,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     branding: exampleBranding,
                 },
                 {
-                    key: uuid(), // https://www.npmjs.com/package/uuid
+                    id: uuid(), // https://www.npmjs.com/package/uuid
                     name: 'Zoo visit questionnaire',
                     description: exampleDescription,
                     createdAt: 1549238929,
@@ -65,7 +65,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     branding: exampleBranding,
                 },
                 {
-                    key: uuid(),
+                    id: uuid(),
                     name: 'Shopping preferences survey',
                     description: exampleDescription,
                     createdAt: 1547049812,
@@ -75,7 +75,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     branding: exampleBranding,
                 },
                 {
-                    key: uuid(),
+                    id: uuid(),
                     name: "Amy Ableton's Amazing Audit",
                     description: exampleDescription,
                     createdAt: 1511049812,

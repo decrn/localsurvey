@@ -1,7 +1,7 @@
 import { SurveyStatus } from './survey-status.type';
 
 export interface Survey {
-    key: string;
+    id: string;
     name: string;
     description: string;
     status: SurveyStatus;

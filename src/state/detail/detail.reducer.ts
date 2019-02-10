@@ -10,7 +10,7 @@ export interface DetailState {
 
 export const initialDetailState = {
     survey: {
-        key: '',
+        id: '',
         name: '',
         description: '',
         status: SurveyStatus.InProgress,

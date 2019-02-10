@@ -1,7 +1,6 @@
 import { Button, Card, Icon, Modal } from 'antd';
 import React, { Component, ComponentClass } from 'react';
 import { connect } from 'react-redux';
-import { match } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey.form';
 import { Survey } from '../../common/types/survey.type';
@@ -14,15 +13,14 @@ export interface DetailRouteInfo {
 }
 
 export interface DetailContainerProps {
-    surveys: Survey[];
-    match: match<DetailRouteInfo>;
+    survey: Survey;
     modalVisible: boolean;
     generalForm: ComponentClass<SurveyFormProps>;
     brandingForm: ComponentClass<BrandingFormProps>;
 }
 
 const mapStateToProps = (state: AppState): Partial<DetailContainerProps> => ({
-    surveys: state.surveysState.surveys,
+    survey: state.surveysState.surveys.find(s => s.id === state.router.location.pathname.slice(1)),
 });
 
 // @ts-ignore
@@ -37,14 +35,7 @@ export class DetailContainer extends Component<DetailContainerProps> {
     };
 
     render() {
-        const { modalVisible } = this.props;
-
-        // TODO: there has to be a better way to do this
-        let id = Number.parseInt(this.props.match.params.surveyid, 10);
-        if (id === NaN) {
-            id = -1;
-        }
-        const survey = this.props.surveys[id];
+        const { survey, modalVisible } = this.props;
 
         return (
             <>
