@@ -19,7 +19,11 @@ export interface StatusTagProps {
     size?: StatusTagSize;
 }
 
-export const StatusTag: SFC<StatusTagProps> = ({ status, size, extended }: StatusTagProps): JSX.Element => (
+export const StatusTag: SFC<StatusTagProps> = ({
+    status,
+    size = 'medium',
+    extended = false,
+}: StatusTagProps): JSX.Element => (
     <Tooltip placement="topLeft" title={STATUS_TOOLTIPS[status]}>
         <Tag className={`status-tag--${size}`} color={mapStatusToColor(status)}>
             <Icon type={mapStatusToIcon(status)} />
