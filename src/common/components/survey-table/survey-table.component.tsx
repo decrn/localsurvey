@@ -3,30 +3,23 @@ import Search from 'antd/lib/input/Search';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
 import RadioButton from 'antd/lib/radio/radioButton';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { CollapsibleButtons } from '../../common/components/collapsible-buttons/collapsible-buttons.component';
-import { StatusTag } from '../../common/components/status-tag/status-tag.component';
-import { mapStatusToIcon } from '../../common/mappers/survey-status.mapper';
-import { SurveyStatus } from '../../common/types/survey-status.type';
-import { Survey } from '../../common/types/survey.type';
-import { epochToLocaleString } from '../../common/utils/date.utils';
-import './survey-list.component.less';
+import { mapStatusToIcon } from '../../mappers/survey-status.mapper';
+import { SurveyStatus } from '../../types/survey-status.type';
+import { Survey } from '../../types/survey.type';
+import { epochToLocaleString } from '../../utils/date.utils';
+import { StatusTag } from '../status-tag/status-tag.component';
+import './survey-table.component.less';
 
-export interface SurveyListProps {
+export interface SurveyTableProps {
     items: Survey[];
+    onChangeFilter: (status: string) => void;
 }
 
-export class SurveyList extends Component<SurveyListProps> {
+export class SurveyTable extends Component<SurveyTableProps> {
     state = {
-        statusFilter: 'all',
         search: '',
-        items: this.props.items,
-    };
-
-    matchesStatus = (survey: Survey): boolean => {
-        const { statusFilter } = this.state;
-        return statusFilter === 'all' ? true : survey.status === statusFilter;
     };
 
     matchesSearchQuery = (survey: Survey): boolean => {
@@ -34,10 +27,11 @@ export class SurveyList extends Component<SurveyListProps> {
         return search === '' ? true : survey.name.toLowerCase().indexOf(search.toString().toLowerCase()) > -1;
     };
 
-    filter = (items: Survey[]): Survey[] => items.filter(this.matchesStatus).filter(this.matchesSearchQuery);
-
     render() {
-        const { items } = this.state;
+        const { onChangeFilter, items } = this.props;
+
+        const filteredItems = items.filter(this.matchesSearchQuery);
+
         const columns: any = [
             {
                 title: 'Status',
@@ -56,13 +50,13 @@ export class SurveyList extends Component<SurveyListProps> {
                 title: 'Created at',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: (epoch: number) => epochToLocaleString(epoch),
+                render: epochToLocaleString,
             },
             {
                 title: 'Last modified at',
                 dataIndex: 'modifiedAt',
                 key: 'modifiedAt',
-                render: (epoch: number) => epochToLocaleString(epoch),
+                render: epochToLocaleString,
             },
             {
                 title: 'Question count',
@@ -72,21 +66,26 @@ export class SurveyList extends Component<SurveyListProps> {
             },
             {
                 title: 'Actions',
-                className: 'action-buttons',
                 render: () => (
-                    <>
-                        <CollapsibleButtons>
-                            <Button type="primary" icon="form" onClick={() => console.log('Test 1')}>
-                                Start surveying
-                            </Button>
-                            <Button type="default" icon="eye-o" onClick={() => console.log('Test 2')}>
-                                View details
-                            </Button>
-                            <Button type="danger" icon="delete" onClick={() => console.log('Test 3')}>
-                                Delete
-                            </Button>
-                        </CollapsibleButtons>
-                    </>
+                    <div className="action-buttons">
+                        <Tooltip title="Start surveying">
+                            <Icon type="form" className="button button--start" onClick={() => console.log('Test 1')} />
+                        </Tooltip>
+                        <Tooltip title="View details">
+                            <Icon
+                                type="eye-o"
+                                className="button button--details"
+                                onClick={() => console.log('Test 2')}
+                            />
+                        </Tooltip>
+                        <Tooltip title="Delete">
+                            <Icon
+                                type="delete"
+                                className="button button--delete"
+                                onClick={() => console.log('Test 3')}
+                            />
+                        </Tooltip>
+                    </div>
                 ),
             },
         ];
@@ -110,20 +109,14 @@ export class SurveyList extends Component<SurveyListProps> {
                         </Col>
                     </Row>
                     <Table
-                        dataSource={this.filter(items)}
+                        dataSource={filteredItems}
                         columns={columns}
                         bordered
                         title={() => (
                             <Row type="flex" justify="space-between">
                                 <Col span={16}>
                                     <span className="filterText">Filter:</span>
-                                    <RadioGroup
-                                        name="status-filter"
-                                        defaultValue="all"
-                                        onChange={(e: RadioChangeEvent) => {
-                                            this.setState({ statusFilter: e.target.value });
-                                        }}
-                                    >
+                                    <RadioGroup name="status-filter" defaultValue="all" onChange={this.onChangeFilter}>
                                         <RadioButton value="all">All</RadioButton>
                                         <RadioButton value={SurveyStatus.Published}>
                                             <Icon type={mapStatusToIcon(SurveyStatus.Published)} /> Published
@@ -152,4 +145,8 @@ export class SurveyList extends Component<SurveyListProps> {
             </div>
         );
     }
+
+    onChangeFilter = (e: RadioChangeEvent): void => {
+        this.props.onChangeFilter(e.target.value);
+    };
 }

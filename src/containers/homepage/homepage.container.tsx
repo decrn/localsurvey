@@ -1,26 +1,44 @@
 import { Layout } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { SurveyTable } from '../../common/components/survey-table/survey-table.component';
+import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
+import { ChangeSurveysFilterAction } from '../../state/surveys/surveys.actions';
+import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 import './homepage.container.less';
-import { SurveyList } from './survey-list.component';
 
 const { Header, Footer, Content } = Layout;
 
 export interface HomepageContainerProps {
     surveys: Survey[];
+    filter: string;
+}
+
+export interface HomepageContainerDispatchProps {
+    onChangeFilter: (e: string) => void;
 }
 
 const mapStateToProps = (state: AppState): Partial<HomepageContainerProps> => ({
     surveys: state.surveysState.surveys,
+    filter: state.surveysState.filter,
+});
+
+const mapDispatchToProps = mappedDispatchProps<HomepageContainerDispatchProps>({
+    onChangeFilter: (filter: string) => new ChangeSurveysFilterAction({ filter }),
 });
 
 // @ts-ignore
-@connect(mapStateToProps)
-export class HomepageContainer extends Component<HomepageContainerProps> {
+@connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)
+export class HomepageContainer extends Component<HomepageContainerProps & HomepageContainerDispatchProps> {
     render() {
-        const { surveys } = this.props;
+        const { surveys, filter } = this.props;
+
+        const filteredSurveys = filter === 'all' ? surveys : surveys.filter(survey => survey.status === filter);
 
         return (
             <Layout className="layout">
@@ -37,7 +55,7 @@ export class HomepageContainer extends Component<HomepageContainerProps> {
                             eligendi hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid
                             similique sunt corporis consequuntur nam quis!
                         </p>
-                        <SurveyList items={surveys} />
+                        <SurveyTable items={filteredSurveys} onChangeFilter={this.onChangeFilter} />
                     </div>
                 </Content>
                 <Footer>
@@ -50,4 +68,8 @@ export class HomepageContainer extends Component<HomepageContainerProps> {
             </Layout>
         );
     }
+
+    onChangeFilter = (value: string): void => {
+        this.props.onChangeFilter(value);
+    };
 }
