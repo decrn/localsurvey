@@ -2,7 +2,6 @@ import { Layout } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SurveyTable } from '../../common/components/survey-table/survey-table.component';
-import { SurveyStatus } from '../../common/types/survey-status.type';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import { ChangeSurveysFilterAction } from '../../state/surveys/surveys.actions';

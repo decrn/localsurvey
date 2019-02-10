@@ -3,7 +3,7 @@ import Search from 'antd/lib/input/Search';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
 import RadioButton from 'antd/lib/radio/radioButton';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { mapStatusToIcon } from '../../mappers/survey-status.mapper';
 import { SurveyStatus } from '../../types/survey-status.type';
@@ -28,7 +28,7 @@ export class SurveyTable extends Component<SurveyTableProps> {
     };
 
     render() {
-        const { onChangeFilter, items } = this.props;
+        const { items } = this.props;
 
         const filteredItems = items.filter(this.matchesSearchQuery);
 
@@ -94,13 +94,13 @@ export class SurveyTable extends Component<SurveyTableProps> {
             <div className="table-container">
                 <div className="table-scroll">
                     <Row type="flex" justify="space-between">
-                        <Col span={12}>
+                        <Col>
                             <h2>Surveys</h2>
                         </Col>
-                        <Col span={12}>
+                        <Col>
                             <Link to="/survey/new">
                                 <Tooltip placement="left" title="Create a new survey">
-                                    <Button type="primary" style={{ float: 'right' }}>
+                                    <Button type="primary">
                                         <Icon type="plus" />
                                         New survey
                                     </Button>
@@ -131,7 +131,6 @@ export class SurveyTable extends Component<SurveyTableProps> {
                                 </Col>
                                 <Col span={8}>
                                     <Search
-                                        style={{ float: 'right' }}
                                         placeholder="Search surveys..."
                                         onChange={e => this.setState({ search: e.target.value })}
                                         enterButton
