@@ -27,6 +27,7 @@
                 "property-declaration": "onespace",
                 "variable-declaration": "onespace"
             }
-        ]
+        ],
+        "variable-name": false
     }
 }

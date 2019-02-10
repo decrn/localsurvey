@@ -38,6 +38,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     branding: exampleBranding,
                 },
             ],
+            filter: 'all',
         },
     },
     [Environment.Development]: {
@@ -84,6 +85,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     branding: exampleBranding,
                 },
             ],
+            filter: 'all',
         },
     },
 };

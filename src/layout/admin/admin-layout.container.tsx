@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import React, { Component } from 'react';
-import './layout.container.less';
+import './admin-layout.container.less';
 
 const { Header, Footer, Content } = Layout;
 
@@ -13,8 +13,8 @@ export class AdminLayoutContainer extends Component {
                         <h1>Localsurvey</h1>
                     </div>
                 </Header>
-                <Content className="content">
-                    <div className="content-wrapper">{this.props.children}</div>
+                <Content className="content--wrapper">
+                    <div className="content">{this.props.children}</div>
                 </Content>
                 <Footer>
                     <p>

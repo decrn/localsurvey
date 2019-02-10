@@ -1,0 +1,34 @@
+@import '../../../styles/ant-variables.less';
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-scroll {
+  min-width: 700px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+span.filterText {
+  padding-right: 6px;
+}
+
+.button {
+  transition: color 0.3s ease;
+
+  &--start:hover {
+    color: @primary-color;
+  }
+  &--details:hover {
+    color: @warning-color;
+  }
+  &--delete:hover {
+    color: @error-color;
+  }
+}
