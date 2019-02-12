@@ -1,16 +1,20 @@
 .layout {
-  height: 100%;
+  min-height: 100%;
 }
 
 .ant-layout {
-  &-header {
-    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
-  }
-
   &-header,
   &-footer {
     background: #f9f9f9;
     z-index: 1;
+  }
+
+  &-header {
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  &-footer {
+    padding: 20px 50px;
   }
 }
 
@@ -19,7 +23,7 @@
   min-height: 280px;
   height: 100%;
 
-  &-wrapper {
+  &--wrapper {
     padding: 50px 50px 0;
     background: #fdfdfd;
   }

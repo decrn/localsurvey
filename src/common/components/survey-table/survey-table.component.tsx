@@ -66,27 +66,31 @@ export class SurveyTable extends Component<SurveyTableProps> {
             },
             {
                 title: 'Actions',
-                render: () => (
-                    <div className="action-buttons">
-                        <Tooltip title="Start surveying">
-                            <Icon type="form" className="button button--start" onClick={() => console.log('Test 1')} />
-                        </Tooltip>
-                        <Tooltip title="View details">
-                            <Icon
-                                type="eye-o"
-                                className="button button--details"
-                                onClick={() => console.log('Test 2')}
-                            />
-                        </Tooltip>
-                        <Tooltip title="Delete">
-                            <Icon
-                                type="delete"
-                                className="button button--delete"
-                                onClick={() => console.log('Test 3')}
-                            />
-                        </Tooltip>
-                    </div>
-                ),
+                render: (survey: Survey) => {
+                    return (
+                        <div className="action-buttons">
+                            <Tooltip title="Start surveying">
+                                <Icon
+                                    type="form"
+                                    className="button button--start"
+                                    onClick={() => console.log('Test 1')}
+                                />
+                            </Tooltip>
+                            <Tooltip title="Edit">
+                                <Link to={survey.id}>
+                                    <Icon type="edit" className="button button--details" />
+                                </Link>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                                <Icon
+                                    type="delete"
+                                    className="button button--delete"
+                                    onClick={() => console.log('Test 3')}
+                                />
+                            </Tooltip>
+                        </div>
+                    );
+                },
             },
         ];
 

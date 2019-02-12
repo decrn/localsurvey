@@ -17,6 +17,7 @@ export interface StatusTagProps {
     status: SurveyStatus;
     extended?: boolean;
     size?: StatusTagSize;
+    tooltipPlacement?: 'top' | 'right' | 'left' | 'bottom';
 }
 
 export const StatusTag: SFC<StatusTagProps> = ({
