@@ -20,7 +20,7 @@ export interface AppState {
 const persistConfig = {
     storage,
     key: 'root',
-    stateReconsiler: autoMergeLevel1, // https://github.com/rt2zz/redux-persist#state-reconciler
+    stateReconciler: autoMergeLevel1, // https://github.com/rt2zz/redux-persist#state-reconciler
 };
 
 export const reducers = (history: History<any>): { [key in keyof AppState]: Reducer<any, any> } => ({
