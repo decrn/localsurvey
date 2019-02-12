@@ -2,12 +2,25 @@
   height: 100%;
 }
 
-.content {
-  padding: 50px 50px 0;
+.ant-layout {
+  &-header {
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.05);
+  }
 
-  .content-wrapper {
-    background: #fff;
-    padding: 24px;
-    min-height: 280px;
+  &-header,
+  &-footer {
+    background: #f9f9f9;
+    z-index: 1;
+  }
+}
+
+.content {
+  padding: 24px;
+  min-height: 280px;
+  height: 100%;
+
+  &-wrapper {
+    padding: 50px 50px 0;
+    background: #fdfdfd;
   }
 }
