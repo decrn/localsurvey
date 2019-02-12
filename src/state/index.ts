@@ -2,6 +2,9 @@ import { connectRouter, RouterState } from 'connected-react-router';
 import { createBrowserHistory, History } from 'history';
 import { combineReducers, createStore, Reducer } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistReducer, persistStore } from 'redux-persist';
+import { default as autoMergeLevel1 } from 'redux-persist/es/stateReconciler/autoMergeLevel1';
+import { default as storage } from 'redux-persist/es/storage';
 import { mapStringToEnvironment } from '../common/mappers/environment.mapper';
 import { Environment } from '../common/types/environment.type';
 import { counterReducer, CounterState } from './counter/counter.reducer';
@@ -14,6 +17,12 @@ export interface AppState {
     router: RouterState;
 }
 
+const persistConfig = {
+    storage,
+    key: 'root',
+    stateReconciler: autoMergeLevel1, // https://github.com/rt2zz/redux-persist#state-reconciler
+};
+
 export const reducers = (history: History<any>): { [key in keyof AppState]: Reducer<any, any> } => ({
     counterState: counterReducer,
     surveysState: surveysReducer,
@@ -24,4 +33,8 @@ export const history = createBrowserHistory({ basename: 'localsurvey' });
 
 const environment: Environment = mapStringToEnvironment(process.env.NODE_ENV);
 
-export const store = createStore(combineReducers(reducers(history)), DEFAULT_STATE[environment], composeWithDevTools());
+const combinedReducers = persistReducer(persistConfig, combineReducers(reducers(history)));
+
+export const store = createStore(combinedReducers, DEFAULT_STATE[environment], composeWithDevTools());
+
+export const persistor = persistStore(store);
