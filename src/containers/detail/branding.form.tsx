@@ -157,5 +157,4 @@ class BrandingFormComponent extends Component<BrandingFormProps & FormComponentP
     }
 }
 
-// tslint:disable-next-line:variable-name
 export const BrandingForm = Form.create<BrandingFormProps>({ mapPropsToFields })(BrandingFormComponent);

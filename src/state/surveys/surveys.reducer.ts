@@ -17,6 +17,13 @@ export function surveysReducer(state: SurveysState = initialSurveysState, action
     switch (action.type) {
         case SurveysActionType.ChangeSurveysFilterAction:
             return { ...state, filter: action.payload.filter };
+        case SurveysActionType.UpdateSurveyAction:
+            return {
+                ...state,
+                surveys: state.surveys.map(survey =>
+                    survey.id === action.payload.surveyId ? { ...survey, ...action.payload.changes } : survey,
+                ),
+            };
         default:
             return state;
     }

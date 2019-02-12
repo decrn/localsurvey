@@ -8,13 +8,15 @@ export interface Survey {
     createdAt: number;
     modifiedAt: number;
     questionCount: number;
+    color: string;
+    // branding: SurveyBranding;
+}
 
-    branding: {
-        introductionMessage: string;
-        logoUrl: string;
-        organisationName: string;
-        accentColor: string;
-        footerText: string;
-        completionMessage: string;
-    };
+export interface SurveyBranding {
+    introductionMessage: string;
+    logoUrl: string;
+    organisationName: string;
+    accentColor: string;
+    footerText: string;
+    completionMessage: string;
 }

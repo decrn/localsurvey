@@ -1,13 +1,18 @@
-import { Input } from 'antd';
+import { Button, Input } from 'antd';
 import Form, { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import React, { Component } from 'react';
+import { ColorPicker } from '../color-picker/color-picker.component';
+import './survey-form.component.less';
+
+export interface SurveyFormValues {
+    name: string;
+    description: string;
+}
 
 export interface SurveyFormProps {
-    values: {
-        name: string;
-        description: string;
-    };
+    values: SurveyFormValues;
+    onSubmit: (values: SurveyFormValues) => void;
 }
 
 const mapPropsToFields = (props: SurveyFormProps) => {
@@ -29,7 +34,7 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // console.log('Received values of form: ', values);
+                this.props.onSubmit(values);
             }
         });
     };
@@ -41,8 +46,9 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
         // Only show error after a field is touched.
 
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form className="edit-survey__form" onSubmit={this.handleSubmit}>
                 <FormItem
+                    label="Name"
                     validateStatus={getValidateStatus('name') ? 'error' : ''}
                     help={getValidateStatus('name') || ''}
                 >
@@ -52,6 +58,7 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
                 </FormItem>
 
                 <FormItem
+                    label="Description"
                     validateStatus={getValidateStatus('description') ? 'error' : ''}
                     help={getValidateStatus('description') || ''}
                 >
@@ -59,6 +66,28 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
                         rules: [{ required: true, message: 'Please input a description!' }],
                     })(<Input placeholder="Description" />)}
                 </FormItem>
+
+                <FormItem
+                    label="Accent color"
+                    validateStatus={getValidateStatus('accentColor') ? 'error' : ''}
+                    help={getValidateStatus('accentColor') || ''}
+                    labelCol={{
+                        xs: { span: 24 },
+                        sm: { span: 8 },
+                    }}
+                    wrapperCol={{
+                        xs: { span: 24 },
+                        sm: { span: 16 },
+                    }}
+                >
+                    {getFieldDecorator('accentColor', {
+                        rules: [],
+                    })(<ColorPicker />)}
+                </FormItem>
+
+                <Button className="submit-button" onClick={this.handleSubmit}>
+                    Save
+                </Button>
             </Form>
         );
     }
