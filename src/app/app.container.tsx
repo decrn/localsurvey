@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { BuilderContainer } from '../containers/builder/builder.container';
 import { CounterContainer } from '../containers/counter/counter.container';
 import { DetailContainer } from '../containers/detail/detail.container';
 import { HomepageContainer } from '../containers/homepage/homepage.container';
@@ -13,6 +14,7 @@ export class AppContainer extends Component {
                 <Switch>
                     <Route exact path="/" component={HomepageContainer} />
                     <Route exact path="/:surveyid" component={DetailContainer} />
+                    <Route exact path="/builder/:surveyid" component={BuilderContainer} />
                     <Route path="/counter" component={CounterContainer} />
                     <Route render={() => <div>No routes here</div>} />
                 </Switch>
