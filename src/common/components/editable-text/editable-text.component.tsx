@@ -1,6 +1,7 @@
 import { Icon } from 'antd';
-import React, { Component, createRef, Fragment } from 'react';
+import React, { Component, createRef } from 'react';
 import { Key } from '../../types/key.type';
+import './editable-text.component.less';
 
 export interface EditableTextProps {
     text: string;
@@ -22,9 +23,10 @@ export class EditableText extends Component<EditableTextProps, EditableTextState
 
     render() {
         const { text } = this.props;
+        const { hasFocus } = this.state;
 
         return (
-            <Fragment>
+            <span className={`editable-text ${hasFocus ? 'editable-text--focused' : 'editable-text--unfocused'}`}>
                 <span
                     onBlur={this.onBlur}
                     onFocus={this.onFocus}
@@ -35,8 +37,8 @@ export class EditableText extends Component<EditableTextProps, EditableTextState
                 >
                     {text}
                 </span>
-                <Icon type="edit" onClick={this.onFocus} />
-            </Fragment>
+                <Icon className="pencil" type="edit" onClick={this.onFocus} />
+            </span>
         );
     }
 
