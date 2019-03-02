@@ -1,9 +1,11 @@
 import { Button, Icon } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
+import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
 import './builder.container.less';
 
 export interface BuilderRouteInfo {
@@ -14,14 +16,18 @@ export interface BuilderContainerProps {
     survey: Survey;
 }
 
-const mapStateToProps = (state: AppState): Partial<BuilderContainerProps> => ({
-    survey: state.surveysState.surveys.find(s => s.id === state.router.location.pathname.split('/').reverse()[0]),
+const mapStateToProps = (
+    state: AppState,
+    props: RouteComponentProps<{ surveyid: string }>,
+): Partial<BuilderContainerProps> => ({
+    survey: selectCurrentSurvey(state, props),
 });
 
 // @ts-ignore
 @connect(mapStateToProps)
 export class BuilderContainer extends Component<BuilderContainerProps> {
     render() {
+        // @ts-ignore
         const { survey } = this.props;
 
         if (!survey) {
