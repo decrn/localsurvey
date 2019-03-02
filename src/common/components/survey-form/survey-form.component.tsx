@@ -93,5 +93,4 @@ class SurveyFormComponent extends Component<SurveyFormProps & FormComponentProps
     }
 }
 
-// tslint:disable-next-line:variable-name
 export const SurveyForm = Form.create<SurveyFormProps>({ mapPropsToFields })(SurveyFormComponent);

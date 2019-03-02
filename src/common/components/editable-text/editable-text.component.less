@@ -1,0 +1,23 @@
+.editable-text {
+  &--focused,
+  & span {
+    outline: none;
+  }
+
+  &--focused {
+    font-style: italic;
+  }
+
+  .pencil {
+    color: transparent;
+    padding-left: 4px;
+    cursor: text;
+  }
+
+  & span:focus,
+  &:hover {
+    .pencil {
+      color: unset;
+    }
+  }
+}
