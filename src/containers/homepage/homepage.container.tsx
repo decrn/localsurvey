@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { SurveyTable } from '../../common/components/survey-table/survey-table.component';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import { ChangeSurveysFilterAction } from '../../state/surveys/surveys.actions';
+import { selectAllSurveys } from '../../state/surveys/surveys.selectors';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 
 export interface HomepageContainerProps {
@@ -16,7 +18,7 @@ export interface HomepageContainerDispatchProps {
 }
 
 const mapStateToProps = (state: AppState): Partial<HomepageContainerProps> => ({
-    surveys: state.surveysState.surveys,
+    surveys: selectAllSurveys(state),
     filter: state.surveysState.filter,
 });
 
@@ -29,25 +31,28 @@ const mapDispatchToProps = mappedDispatchProps<HomepageContainerDispatchProps>({
     mapStateToProps,
     mapDispatchToProps,
 )
-export class HomepageContainer extends Component<HomepageContainerProps & HomepageContainerDispatchProps> {
+export class HomepageContainer extends Component<
+    HomepageContainerProps & HomepageContainerDispatchProps & RouteComponentProps
+> {
     render() {
         const { surveys, filter } = this.props;
 
         const filteredSurveys = filter === 'all' ? surveys : surveys.filter(survey => survey.status === filter);
 
         return (
-            <>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolor, ipsa quas omnis eligendi
-                    hic deleniti alias vel possimus. Unde voluptatibus excepturi tenetur aliquid similique sunt corporis
-                    consequuntur nam quis!
-                </p>
-                <SurveyTable onChangeFilter={this.onChangeFilter} items={filteredSurveys} />
-            </>
+            <SurveyTable
+                onChangeFilter={this.onChangeFilter}
+                items={filteredSurveys}
+                onRowSelected={this.onRowSelected}
+            />
         );
     }
 
     onChangeFilter = (value: string): void => {
         this.props.onChangeFilter(value);
+    };
+
+    onRowSelected = (surveyId: string) => {
+        this.props.history.push(surveyId);
     };
 }
