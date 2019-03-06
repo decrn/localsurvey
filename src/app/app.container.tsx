@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { PageNotFound } from '../common/components/page-not-found/page-not-found.component';
 import { BuilderContainer } from '../containers/builder/builder.container';
 import { DetailContainer } from '../containers/detail/detail.container';
 import { HomepageContainer } from '../containers/homepage/homepage.container';
@@ -14,9 +15,9 @@ export class AppContainer extends Component {
                 <Switch>
                     <Route exact path="/" component={HomepageContainer} />
                     <Route exact path="/sandbox" component={SandboxContainer} />
-                    <Route exact path="/:surveyid" component={DetailContainer} />
+                    <Route exact path="/surveys/:surveyid" component={DetailContainer} />
                     <Route exact path="/builder/:surveyid" component={BuilderContainer} />
-                    <Route render={() => <div>No routes here</div>} />
+                    <Route component={PageNotFound} />
                 </Switch>
             </AdminLayoutContainer>
         );

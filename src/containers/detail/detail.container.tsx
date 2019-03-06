@@ -1,13 +1,14 @@
 import { Button, Card } from 'antd';
 import React, { Component, ComponentClass } from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey-form.component';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import { UpdateSurveyAction } from '../../state/surveys/surveys.actions';
+import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
-// import { BrandingForm, BrandingFormProps } from './branding.form';
 import './detail.container.less';
 
 export interface DetailRouteInfo {
@@ -24,8 +25,11 @@ export interface DetailContainerDispatchProps {
     onUpdateSurvey: (surveyId: string, changes: Partial<Survey>) => void;
 }
 
-const mapStateToProps = (state: AppState): Partial<DetailContainerProps> => ({
-    survey: state.surveysState.surveys.find(s => s.id === state.router.location.pathname.slice(1)),
+const mapStateToProps = (
+    state: AppState,
+    props: RouteComponentProps<{ surveyid: string }>,
+): Partial<DetailContainerProps> => ({
+    survey: selectCurrentSurvey(state, props),
 });
 
 const mapDispatchToProps = mappedDispatchProps<DetailContainerDispatchProps>({
