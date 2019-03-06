@@ -53,6 +53,6 @@ export class HomepageContainer extends Component<
     };
 
     onRowSelected = (surveyId: string) => {
-        this.props.history.push(surveyId);
+        this.props.history.push(`surveys/${surveyId}`);
     };
 }
