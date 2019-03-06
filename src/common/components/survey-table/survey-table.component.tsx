@@ -103,7 +103,7 @@ export class SurveyTable extends Component<SurveyTableProps> {
                                 <Col span={8}>
                                     <Search
                                         placeholder="Search surveys..."
-                                        onChange={e => this.setState({ search: e.target.value })}
+                                        onChange={e => this.setState({ query: e.target.value })}
                                         enterButton
                                         allowClear
                                     />
