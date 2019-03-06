@@ -1,7 +1,7 @@
 import { Button, Card } from 'antd';
 import React, { Component, ComponentClass } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
+import { Redirect, RouteComponentProps } from 'react-router';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey-form.component';
 import { Survey } from '../../common/types/survey.type';
@@ -46,7 +46,7 @@ export class DetailContainer extends Component<DetailContainerProps & DetailCont
         const { survey } = this.props;
 
         if (!survey) {
-            return <span>Survey not found</span>;
+            return <Redirect to="/404" />;
         }
 
         return (
