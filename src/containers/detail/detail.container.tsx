@@ -1,31 +1,33 @@
 import { Button, Card } from 'antd';
-import React, { Component, ComponentClass } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect, RouteComponentProps } from 'react-router';
+import { EditSurveyDetailsModal } from '../../common/components/edit-survey-details-modal/edit-survey-details-modal.component';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
-import { SurveyForm, SurveyFormProps } from '../../common/components/survey-form/survey-form.component';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
 import { UpdateSurveyAction } from '../../state/surveys/surveys.actions';
+import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
-// import { BrandingForm, BrandingFormProps } from './branding.form';
 import './detail.container.less';
-
-export interface DetailRouteInfo {
-    surveyid: string;
-}
 
 export interface DetailContainerProps {
     survey: Survey;
-    generalForm: ComponentClass<SurveyFormProps>;
-    // brandingForm: ComponentClass<BrandingFormProps>;
 }
 
 export interface DetailContainerDispatchProps {
     onUpdateSurvey: (surveyId: string, changes: Partial<Survey>) => void;
 }
 
-const mapStateToProps = (state: AppState): Partial<DetailContainerProps> => ({
-    survey: state.surveysState.surveys.find(s => s.id === state.router.location.pathname.slice(1)),
+export interface DetailContainerState {
+    isEditModalVisible: boolean;
+}
+
+const mapStateToProps = (
+    state: AppState,
+    props: RouteComponentProps<{ surveyid: string }>,
+): Partial<DetailContainerProps> => ({
+    survey: selectCurrentSurvey(state, props),
 });
 
 const mapDispatchToProps = mappedDispatchProps<DetailContainerDispatchProps>({
@@ -37,26 +39,26 @@ const mapDispatchToProps = mappedDispatchProps<DetailContainerDispatchProps>({
     mapStateToProps,
     mapDispatchToProps,
 )
-export class DetailContainer extends Component<DetailContainerProps & DetailContainerDispatchProps> {
+export class DetailContainer extends Component<
+    DetailContainerProps & DetailContainerDispatchProps,
+    DetailContainerState
+> {
+    state = { isEditModalVisible: false };
+
     render() {
         const { survey } = this.props;
+        const { isEditModalVisible } = this.state;
 
         if (!survey) {
-            return <span>Survey not found</span>;
+            return <Redirect to="/404" />;
         }
 
         return (
             <>
                 <h2>
                     {survey.name}
-                    <Button
-                        style={{ margin: '0 6px' }}
-                        shape="circle"
-                        icon="edit"
-                        onClick={() => this.setState({ modalVisible: true })}
-                    />
+                    <Button style={{ margin: '0 6px' }} shape="circle" icon="edit" onClick={this.toggleEditModal} />
                 </h2>
-
                 <Card
                     title={
                         <>
@@ -74,21 +76,27 @@ export class DetailContainer extends Component<DetailContainerProps & DetailCont
 
                     <Button style={{ float: 'right' }}>See results</Button>
                 </Card>
-                <Card>
-                    <SurveyForm
+                {isEditModalVisible && (
+                    <EditSurveyDetailsModal
+                        onCancel={this.toggleEditModal}
                         values={{
                             name: survey.name,
                             description: survey.description,
                         }}
                         onSubmit={this.updateSurvey}
                     />
-                </Card>
+                )}
             </>
         );
     }
 
+    toggleEditModal = (): void => {
+        this.setState(prevState => ({ isEditModalVisible: !prevState.isEditModalVisible }));
+    };
+
     updateSurvey = (values: { name: string; description: string }) => {
         const surveyId = this.props.survey.id;
         this.props.onUpdateSurvey(surveyId, values);
+        this.toggleEditModal();
     };
 }

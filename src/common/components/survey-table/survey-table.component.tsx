@@ -8,23 +8,20 @@ import { Link } from 'react-router-dom';
 import { mapStatusToIcon } from '../../mappers/survey-status.mapper';
 import { SurveyStatus } from '../../types/survey-status.type';
 import { Survey } from '../../types/survey.type';
-import { epochToLocaleString } from '../../utils/date.utils';
+import { epochFromNow } from '../../utils/date.utils';
+import { matchesQuery } from '../../utils/string.utils';
 import { StatusTag } from '../status-tag/status-tag.component';
 import './survey-table.component.less';
 
 export interface SurveyTableProps {
     items: Survey[];
     onChangeFilter: (status: string) => void;
+    onRowSelected: (surveyId: string) => void;
 }
 
 export class SurveyTable extends Component<SurveyTableProps> {
     state = {
-        search: '',
-    };
-
-    matchesSearchQuery = (survey: Survey): boolean => {
-        const { search } = this.state;
-        return search === '' ? true : survey.name.toLowerCase().indexOf(search.toString().toLowerCase()) > -1;
+        query: '',
     };
 
     render() {
@@ -47,50 +44,16 @@ export class SurveyTable extends Component<SurveyTableProps> {
                 render: (text: string) => text,
             },
             {
-                title: 'Created at',
+                title: 'Created',
                 dataIndex: 'createdAt',
                 key: 'createdAt',
-                render: epochToLocaleString,
+                render: epochFromNow,
             },
             {
-                title: 'Last modified at',
+                title: 'Last modified',
                 dataIndex: 'modifiedAt',
                 key: 'modifiedAt',
-                render: epochToLocaleString,
-            },
-            {
-                title: 'Question count',
-                dataIndex: 'questionCount',
-                key: 'questionCount',
-                render: (count: number) => count,
-            },
-            {
-                title: 'Actions',
-                render: (survey: Survey) => {
-                    return (
-                        <div className="action-buttons">
-                            <Tooltip title="Start surveying">
-                                <Icon
-                                    type="form"
-                                    className="button button--start"
-                                    onClick={() => console.log('Test 1')}
-                                />
-                            </Tooltip>
-                            <Tooltip title="Edit">
-                                <Link to={survey.id}>
-                                    <Icon type="edit" className="button button--details" />
-                                </Link>
-                            </Tooltip>
-                            <Tooltip title="Delete">
-                                <Icon
-                                    type="delete"
-                                    className="button button--delete"
-                                    onClick={() => console.log('Test 3')}
-                                />
-                            </Tooltip>
-                        </div>
-                    );
-                },
+                render: epochFromNow,
             },
         ];
 
@@ -115,7 +78,11 @@ export class SurveyTable extends Component<SurveyTableProps> {
                     <Table
                         dataSource={filteredItems}
                         columns={columns}
+                        rowKey={survey => survey.id}
                         bordered
+                        onRow={(survey: Survey) => ({
+                            onClick: () => this.props.onRowSelected(survey.id),
+                        })}
                         title={() => (
                             <Row type="flex" justify="space-between">
                                 <Col span={16}>
@@ -136,7 +103,7 @@ export class SurveyTable extends Component<SurveyTableProps> {
                                 <Col span={8}>
                                     <Search
                                         placeholder="Search surveys..."
-                                        onChange={e => this.setState({ search: e.target.value })}
+                                        onChange={e => this.setState({ query: e.target.value })}
                                         enterButton
                                         allowClear
                                     />
@@ -149,7 +116,7 @@ export class SurveyTable extends Component<SurveyTableProps> {
         );
     }
 
-    onChangeFilter = (e: RadioChangeEvent): void => {
-        this.props.onChangeFilter(e.target.value);
-    };
+    matchesSearchQuery = (survey: Survey): boolean => matchesQuery(survey.name, this.state.query);
+
+    onChangeFilter = (e: RadioChangeEvent): void => this.props.onChangeFilter(e.target.value);
 }
