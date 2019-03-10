@@ -1,7 +1,9 @@
 import { Button, Form, Input, Modal } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
-import React, { Component } from 'react';
+import React, { Component, FormEvent } from 'react';
+import { FormErrors } from '../../types/forms/form-errors.type';
+import { ValidateStatus } from '../../types/forms/validate-status.type';
 import { ColorPicker } from '../color-picker/color-picker.component';
 
 export interface EditSurveyDetailsFormValues {
@@ -27,8 +29,7 @@ const mapPropsToFields = (props: EditSurveyDetailsModalProps) => {
 export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetailsModalProps & FormComponentProps> {
     render() {
         const { onCancel, form } = this.props;
-        const { getFieldDecorator, getFieldError, isFieldTouched } = form;
-        const getValidateStatus = (name: string) => isFieldTouched(name) && getFieldError(name);
+        const { getFieldDecorator } = form;
 
         return (
             <Modal
@@ -36,7 +37,7 @@ export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetails
                 title="Edit Survey"
                 onCancel={onCancel}
                 footer={[
-                    <Button key="submit" className="submit-button" onClick={this.handleSubmit}>
+                    <Button type="primary" key="submit" className="submit-button" onClick={this.handleSubmit}>
                         Save
                     </Button>,
                 ]}
@@ -44,8 +45,8 @@ export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetails
                 <Form className="edit-survey__form" onSubmit={this.handleSubmit}>
                     <FormItem
                         label="Name"
-                        validateStatus={getValidateStatus('name') ? 'error' : ''}
-                        help={getValidateStatus('name') || ''}
+                        validateStatus={this.getValidateStatus('name')}
+                        help={this.getErrors('name') || ''}
                     >
                         {getFieldDecorator('name', {
                             rules: [{ required: true, message: 'Please input a name!' }],
@@ -54,8 +55,8 @@ export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetails
 
                     <FormItem
                         label="Description"
-                        validateStatus={getValidateStatus('description') ? 'error' : ''}
-                        help={getValidateStatus('description') || ''}
+                        validateStatus={this.getValidateStatus('description')}
+                        help={this.getErrors('description') || ''}
                     >
                         {getFieldDecorator('description', {
                             rules: [{ required: true, message: 'Please input a description!' }],
@@ -64,8 +65,8 @@ export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetails
 
                     <FormItem
                         label="Accent color"
-                        validateStatus={getValidateStatus('accentColor') ? 'error' : ''}
-                        help={getValidateStatus('accentColor') || ''}
+                        validateStatus={this.getValidateStatus('accentColor')}
+                        help={this.getErrors('accentColor') || ''}
                     >
                         {getFieldDecorator('accentColor', {
                             rules: [],
@@ -76,13 +77,30 @@ export class EditSurveyDetailsModalComponent extends Component<EditSurveyDetails
         );
     }
 
-    handleSubmit = (e: any) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.onSubmit(values);
-            }
-        });
+    getErrors = (name: string): any[] => {
+        const { isFieldTouched, getFieldError } = this.props.form;
+        return isFieldTouched(name) ? getFieldError(name) : [];
+    };
+
+    getValidateStatus = (name: string): ValidateStatus => {
+        const { isFieldTouched, getFieldError } = this.props.form;
+        if (!isFieldTouched(name)) {
+            return '';
+        }
+
+        return (getFieldError(name) && getFieldError(name).length && 'error') || '';
+    };
+
+    handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+
+        this.props.form.validateFields(
+            (errors: FormErrors<EditSurveyDetailsFormValues>, values: EditSurveyDetailsFormValues) => {
+                if (!errors) {
+                    this.props.onSubmit(values);
+                }
+            },
+        );
     };
 }
 
