@@ -11,15 +11,6 @@ comparandam et cognitionem habent faciliorem. Duo Reges: constructio interrete. 
 posse se vivere? Cur tantas regiones barbarorum pedibus obiit, tot maria transmisit? Bonum incolumis acies:
 misera caecitas. Cur tantas regiones barbarorum pedibus obiit, tot maria transmisit?`;
 
-const exampleBranding = {
-    introductionMessage: '',
-    logoUrl: '',
-    organisationName: 'Organisation',
-    accentColor: '#2196f3',
-    footerText: '',
-    completionMessage: '',
-};
-
 // Define a preloadedState for createStore()
 // See: https://redux.js.org/recipes/structuring-reducers/initializing-state
 
