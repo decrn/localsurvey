@@ -1,0 +1,22 @@
+@import '../../../styles/ant-variables.less';
+
+.drop-target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 128px;
+  width: 100%;
+  background-color: #fff;
+  padding: 8px;
+  float: left;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  &.dragging {
+    border-color: @primary-color;
+  }
+
+  &.hover {
+    background-color: #fcfcfc;
+  }
+}

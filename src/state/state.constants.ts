@@ -35,7 +35,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549233329,
                     questionCount: 11,
                     status: SurveyStatus.Published,
-                    branding: exampleBranding,
+                    items: [],
                 },
             ],
             filter: 'all',
@@ -52,7 +52,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549233329,
                     questionCount: 11,
                     status: SurveyStatus.Published,
-                    branding: exampleBranding,
+                    items: [],
                 },
                 {
                     id: uuid(), // https://www.npmjs.com/package/uuid
@@ -62,7 +62,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1549325329,
                     questionCount: 7,
                     status: SurveyStatus.Warning,
-                    branding: exampleBranding,
+                    items: [],
                 },
                 {
                     id: uuid(),
@@ -72,7 +72,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1547827412,
                     questionCount: 3,
                     status: SurveyStatus.InProgress,
-                    branding: exampleBranding,
+                    items: [],
                 },
                 {
                     id: uuid(),
@@ -82,7 +82,7 @@ export const DEFAULT_STATE: { [key in Environment]: DeepPartial<AppState> } = {
                     modifiedAt: 1522827412,
                     questionCount: 5,
                     status: SurveyStatus.Cancelled,
-                    branding: exampleBranding,
+                    items: [],
                 },
             ],
             filter: 'all',

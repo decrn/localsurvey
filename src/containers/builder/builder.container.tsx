@@ -1,19 +1,28 @@
-import { Button, Icon } from 'antd';
+import { Card, Icon } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
+import { DragDropBuilder } from '../../builder/components/drag-drop-builder.component';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
+import { SurveyItem } from '../../common/types/survey-item.type';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
+import { AddSurveyItemAction } from '../../state/surveys/surveys.actions';
 import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
+import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 import './builder.container.less';
 
 export interface BuilderRouteInfo {
     surveyid: string;
 }
 
-export interface BuilderContainerProps {
+export interface BuilderContainerProps extends RouteComponentProps {
     survey: Survey;
+}
+
+export interface BuilderContainerDispatchProps {
+    onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
 }
 
 const mapStateToProps = (
@@ -23,11 +32,17 @@ const mapStateToProps = (
     survey: selectCurrentSurvey(state, props),
 });
 
+const mapDispatchToProps = mappedDispatchProps<BuilderContainerDispatchProps>({
+    onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => new AddSurveyItemAction({ surveyId, surveyItem }),
+});
+
 // @ts-ignore
-@connect(mapStateToProps)
-export class BuilderContainer extends Component<BuilderContainerProps> {
+@connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)
+export class BuilderContainer extends Component<BuilderContainerProps & BuilderContainerDispatchProps> {
     render() {
-        // @ts-ignore
         const { survey } = this.props;
 
         if (!survey) {
@@ -36,14 +51,23 @@ export class BuilderContainer extends Component<BuilderContainerProps> {
 
         return (
             <>
-                <h1>
-                    <span>{survey.name}</span>
-                    <StatusTag status={survey.status} size="large" extended />
-                </h1>
-                <Button type="primary">
-                    <Icon type="plus" /> Add a question
-                </Button>
+                <Card>
+                    <div className="row__title">
+                        <Link to={`/surveys/${survey.id}`} className="icon--back">
+                            <Icon type="left-circle" />
+                        </Link>
+                        <h1 className="title">{survey.name}</h1>
+                        <StatusTag status={survey.status} size="large" extended />
+                    </div>
+                </Card>
+
+                <DragDropBuilder surveyItems={survey.items} onAddSurveyItem={this.onAddSurveyItem} />
             </>
         );
     }
+
+    onAddSurveyItem = (surveyItem: SurveyItem) => {
+        const { survey } = this.props;
+        this.props.onAddSurveyItem(survey.id, surveyItem);
+    };
 }

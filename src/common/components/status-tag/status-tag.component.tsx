@@ -17,6 +17,7 @@ export interface StatusTagProps {
     status: SurveyStatus;
     extended?: boolean;
     size?: StatusTagSize;
+    className?: string;
     tooltipPlacement?: 'top' | 'right' | 'left' | 'bottom';
 }
 
@@ -24,9 +25,10 @@ export const StatusTag: SFC<StatusTagProps> = ({
     status,
     size = 'medium',
     extended = false,
+    className = '',
 }: StatusTagProps): JSX.Element => (
     <Tooltip placement="topLeft" title={STATUS_TOOLTIPS[status]}>
-        <Tag className={`status-tag--${size}`} color={mapStatusToColor(status)}>
+        <Tag className={`status-tag--${size} ${className}`} color={mapStatusToColor(status)}>
             <Icon type={mapStatusToIcon(status)} />
             {extended && <span style={{ paddingLeft: '5px' }}>{status}</span>}
         </Tag>

@@ -2,6 +2,7 @@ import { Button, Card } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import { EditSurveyDetailsModal } from '../../common/components/edit-survey-details-modal/edit-survey-details-modal.component';
 import { StatusTag } from '../../common/components/status-tag/status-tag.component';
 import { Survey } from '../../common/types/survey.type';
@@ -68,7 +69,10 @@ export class DetailContainer extends Component<
                     }
                     extra={
                         <>
-                            <Button>Survey Builder</Button> <Button>Start surveying</Button>
+                            <Button>
+                                <Link to={`/builder/${survey.id}`}>Survey Builder</Link>
+                            </Button>{' '}
+                            <Button>Start surveying</Button>
                         </>
                     }
                 >
