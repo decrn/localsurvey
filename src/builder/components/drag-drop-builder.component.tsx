@@ -4,7 +4,7 @@ import uuid from 'uuid/v4';
 import { Draggable } from '../../common/components/draggable/draggable.component';
 import { DropTarget } from '../../common/components/drop-target/drop-target.component';
 import { SurveyQuestion } from '../../common/components/survey-question/survey-question.component';
-import { SurveyItem } from '../../common/types/survey-item.type';
+import { SingleChoice, SurveyItem, SurveyItemType } from '../../common/types/survey-item.type';
 import './drag-drop-builder.component.less';
 
 export interface DragDropBuilderProps {
@@ -28,15 +28,15 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
                 </Card>
                 <Card className="elements">
                     <h2>Survey Elements</h2>
-                    <Draggable onDrop={this.onDrop} name="Single Choice" />
-                    <Draggable onDrop={this.onDrop} name="Multiple Choice" />
-                    <Draggable onDrop={this.onDrop} name="Open Question" />
+                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.SingleChoice)} name="Single Choice" />
+                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.MultiChoice)} name="Multiple Choice" />
+                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.OpenQuestion)} name="Open Question" />
                 </Card>
             </div>
         );
     }
 
-    onDrop = (choice: string) => {
-        this.props.onAddSurveyItem({ id: uuid(), description: choice });
+    onDrop = (choice: string, type: SurveyItemType) => {
+        this.props.onAddSurveyItem({ type, id: uuid(), description: 'some question' });
     };
 }
