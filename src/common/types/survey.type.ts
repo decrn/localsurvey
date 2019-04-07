@@ -1,3 +1,4 @@
+import { SurveyItem } from './survey-item.type';
 import { SurveyStatus } from './survey-status.type';
 
 export interface Survey {
@@ -9,6 +10,7 @@ export interface Survey {
     modifiedAt: number;
     questionCount: number;
     color: string;
+    items: SurveyItem[];
     // branding: SurveyBranding;
 }
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { PageNotFound } from '../common/components/page-not-found/page-not-found.component';
 import { BuilderContainer } from '../containers/builder/builder.container';
@@ -8,7 +10,7 @@ import { SandboxContainer } from '../containers/sandbox/sandbox.container';
 import { AdminLayoutContainer } from '../layout/admin/admin-layout.container';
 import './app.container.less';
 
-export class AppContainer extends Component {
+export class App extends Component {
     render() {
         return (
             <AdminLayoutContainer>
@@ -24,3 +26,5 @@ export class AppContainer extends Component {
         );
     }
 }
+
+export const AppContainer = DragDropContext(HTML5Backend)(App);
