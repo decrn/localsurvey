@@ -1,0 +1,15 @@
+{
+  "main.css": "/localsurvey/static/css/main.2701547d.chunk.css",
+  "main.js": "/localsurvey/static/js/main.c2cf320d.chunk.js",
+  "main.js.map": "/localsurvey/static/js/main.c2cf320d.chunk.js.map",
+  "runtime~main.js": "/localsurvey/static/js/runtime~main.7942f251.js",
+  "runtime~main.js.map": "/localsurvey/static/js/runtime~main.7942f251.js.map",
+  "static/css/2.4c3de420.chunk.css": "/localsurvey/static/css/2.4c3de420.chunk.css",
+  "static/js/2.66d03134.chunk.js": "/localsurvey/static/js/2.66d03134.chunk.js",
+  "static/js/2.66d03134.chunk.js.map": "/localsurvey/static/js/2.66d03134.chunk.js.map",
+  "index.html": "/localsurvey/index.html",
+  "precache-manifest.c1c84ad8a5e3f32d63d650a17b02d41b.js": "/localsurvey/precache-manifest.c1c84ad8a5e3f32d63d650a17b02d41b.js",
+  "service-worker.js": "/localsurvey/service-worker.js",
+  "static/css/2.4c3de420.chunk.css.map": "/localsurvey/static/css/2.4c3de420.chunk.css.map",
+  "static/css/main.2701547d.chunk.css.map": "/localsurvey/static/css/main.2701547d.chunk.css.map"
+}
