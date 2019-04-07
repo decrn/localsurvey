@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 import { Draggable } from '../../common/components/draggable/draggable.component';
 import { DropTarget } from '../../common/components/drop-target/drop-target.component';
+import { SurveyQuestion } from '../../common/components/survey-question/survey-question.component';
 import { SurveyItem } from '../../common/types/survey-item.type';
 import './drag-drop-builder.component.less';
 
@@ -21,7 +22,7 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
                     <h2>Survey</h2>
 
                     {surveyItems.map(item => (
-                        <div key={item.id}>{item.description}</div>
+                        <SurveyQuestion key={item.id} question={item} />
                     ))}
                     <DropTarget />
                 </Card>
