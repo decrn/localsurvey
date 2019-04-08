@@ -2,7 +2,7 @@ interface SurveyQuestion {
     id: string;
     description: string;
     type: SurveyItemType;
-    responses?: string[];
+    responses: string[];
 }
 
 export interface SingleChoice extends SurveyQuestion {}

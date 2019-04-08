@@ -8,7 +8,7 @@ import { StatusTag } from '../../common/components/status-tag/status-tag.compone
 import { SurveyItem } from '../../common/types/survey-item.type';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
-import { AddSurveyItemAction } from '../../state/surveys/surveys.actions';
+import { AddSurveyItemAction, RemoveSurveyItemAction } from '../../state/surveys/surveys.actions';
 import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 import './builder.container.less';
@@ -23,6 +23,7 @@ export interface BuilderContainerProps extends RouteComponentProps {
 
 export interface BuilderContainerDispatchProps {
     onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
+    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
 }
 
 const mapStateToProps = (
@@ -34,6 +35,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = mappedDispatchProps<BuilderContainerDispatchProps>({
     onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => new AddSurveyItemAction({ surveyId, surveyItem }),
+    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) =>
+        new RemoveSurveyItemAction({ surveyId, surveyItem }),
 });
 
 // @ts-ignore
@@ -61,7 +64,11 @@ export class BuilderContainer extends Component<BuilderContainerProps & BuilderC
                     </div>
                 </Card>
 
-                <DragDropBuilder surveyItems={survey.items} onAddSurveyItem={this.onAddSurveyItem} />
+                <DragDropBuilder
+                    surveyItems={survey.items}
+                    onRemoveSurveyItem={this.onRemoveSurveyItem}
+                    onAddSurveyItem={this.onAddSurveyItem}
+                />
             </>
         );
     }
@@ -69,5 +76,10 @@ export class BuilderContainer extends Component<BuilderContainerProps & BuilderC
     onAddSurveyItem = (surveyItem: SurveyItem) => {
         const { survey } = this.props;
         this.props.onAddSurveyItem(survey.id, surveyItem);
+    };
+
+    onRemoveSurveyItem = (surveyItem: SurveyItem) => {
+        const { survey } = this.props;
+        this.props.onRemoveSurveyItem(survey.id, surveyItem);
     };
 }

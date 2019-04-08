@@ -1,27 +1,25 @@
 .question {
-  .questionContent {
+  .question-highlight {
+    display: flex;
+    align-items: center;
     padding: 10px;
   }
 
-  .editbox {
+  .question-toolbox {
+    display: flex;
+    align-items: center;
     padding: 10px;
   }
 
-  .single {
-    .singleInput {
-      padding: 5px 0;
+  .question-content {
+    padding: 10px;
+
+    .options {
+      padding: 10px 0;
+
+      .question-input {
+        padding-bottom: 6px;
+      }
     }
   }
-
-  .multi {
-  }
-
-  .other {
-  }
-}
-
-.questionType {
-  display: flex;
-  align-items: center;
-  padding: 10px;
 }

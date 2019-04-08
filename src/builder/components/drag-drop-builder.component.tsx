@@ -4,12 +4,13 @@ import uuid from 'uuid/v4';
 import { Draggable } from '../../common/components/draggable/draggable.component';
 import { DropTarget } from '../../common/components/drop-target/drop-target.component';
 import { SurveyQuestion } from '../../common/components/survey-question/survey-question.component';
-import { SingleChoice, SurveyItem, SurveyItemType } from '../../common/types/survey-item.type';
+import { SurveyItem, SurveyItemType } from '../../common/types/survey-item.type';
 import './drag-drop-builder.component.less';
 
 export interface DragDropBuilderProps {
     surveyItems: SurveyItem[];
     onAddSurveyItem: (item: SurveyItem) => void;
+    onRemoveSurveyItem: (item: SurveyItem) => void;
 }
 
 export class DragDropBuilder extends Component<DragDropBuilderProps> {
@@ -21,8 +22,8 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
                 <Card className="survey">
                     <h2>Survey</h2>
 
-                    {surveyItems.map(item => (
-                        <SurveyQuestion key={item.id} question={item} />
+                    {surveyItems.map((item, index) => (
+                        <SurveyQuestion onDelete={() => this.onDelete(item)} key={item.id} question={item} />
                     ))}
                     <DropTarget />
                 </Card>
@@ -36,7 +37,16 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
         );
     }
 
+    onDelete = (surveyItem: SurveyItem) => {
+        this.props.onRemoveSurveyItem(surveyItem);
+    };
+
     onDrop = (choice: string, type: SurveyItemType) => {
-        this.props.onAddSurveyItem({ type, id: uuid(), description: 'some question' });
+        this.props.onAddSurveyItem({
+            type,
+            id: uuid(),
+            description: 'some question',
+            responses: ['I agree', 'I disagree'],
+        });
     };
 }
