@@ -49,6 +49,24 @@ export function surveysReducer(state: SurveysState = initialSurveysState, action
                 ),
             };
 
+        case SurveysActionType.UpdateSurveyItemAction:
+            return {
+                ...state,
+                surveys: state.surveys.map(survey =>
+                    survey.id === action.payload.surveyId
+                        ? {
+                              ...survey,
+                              items: [
+                                  ...survey.items.map(item => {
+                                      return item.id === action.payload.surveyItem.id
+                                          ? action.payload.surveyItem
+                                          : item;
+                                  }),
+                              ],
+                          }
+                        : survey,
+                ),
+            };
         default:
             return state;
     }

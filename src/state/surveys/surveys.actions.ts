@@ -7,6 +7,7 @@ export enum SurveysActionType {
     UpdateSurveyAction = 'Surveys: Update Survey',
     AddSurveyItemAction = 'Surveys: Add Survey Item',
     RemoveSurveyItemAction = 'Surveys: Remove Survey Item',
+    UpdateSurveyItemAction = 'Surveys: Update Survey Item',
 }
 
 export class ChangeSurveysFilterAction implements Action {
@@ -29,8 +30,14 @@ export class RemoveSurveyItemAction implements Action {
     constructor(public payload: { surveyId: string; surveyItem: SurveyItem }) {}
 }
 
+export class UpdateSurveyItemAction implements Action {
+    readonly type = SurveysActionType.UpdateSurveyItemAction;
+    constructor(public payload: { surveyId: string; surveyItem: SurveyItem }) {}
+}
+
 export type SurveysAction =
     | ChangeSurveysFilterAction
     | UpdateSurveyAction
     | AddSurveyItemAction
-    | RemoveSurveyItemAction;
+    | RemoveSurveyItemAction
+    | UpdateSurveyItemAction;

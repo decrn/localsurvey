@@ -8,7 +8,11 @@ import { StatusTag } from '../../common/components/status-tag/status-tag.compone
 import { SurveyItem } from '../../common/types/survey-item.type';
 import { Survey } from '../../common/types/survey.type';
 import { AppState } from '../../state';
-import { AddSurveyItemAction, RemoveSurveyItemAction } from '../../state/surveys/surveys.actions';
+import {
+    AddSurveyItemAction,
+    RemoveSurveyItemAction,
+    UpdateSurveyItemAction,
+} from '../../state/surveys/surveys.actions';
 import { selectCurrentSurvey } from '../../state/surveys/surveys.selectors';
 import { mappedDispatchProps } from '../../state/utils/dispatch.util';
 import './builder.container.less';
@@ -24,6 +28,7 @@ export interface BuilderContainerProps extends RouteComponentProps {
 export interface BuilderContainerDispatchProps {
     onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
     onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
+    onUpdateSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
 }
 
 const mapStateToProps = (
@@ -34,9 +39,15 @@ const mapStateToProps = (
 });
 
 const mapDispatchToProps = mappedDispatchProps<BuilderContainerDispatchProps>({
-    onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => new AddSurveyItemAction({ surveyId, surveyItem }),
-    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) =>
-        new RemoveSurveyItemAction({ surveyId, surveyItem }),
+    onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
+        return new AddSurveyItemAction({ surveyId, surveyItem });
+    },
+    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
+        return new RemoveSurveyItemAction({ surveyId, surveyItem });
+    },
+    onUpdateSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
+        return new UpdateSurveyItemAction({ surveyId, surveyItem });
+    },
 });
 
 // @ts-ignore
@@ -68,6 +79,7 @@ export class BuilderContainer extends Component<BuilderContainerProps & BuilderC
                     surveyItems={survey.items}
                     onRemoveSurveyItem={this.onRemoveSurveyItem}
                     onAddSurveyItem={this.onAddSurveyItem}
+                    onUpdateSurveyItem={this.onUpdateSurveyItem}
                 />
             </>
         );
@@ -81,5 +93,10 @@ export class BuilderContainer extends Component<BuilderContainerProps & BuilderC
     onRemoveSurveyItem = (surveyItem: SurveyItem) => {
         const { survey } = this.props;
         this.props.onRemoveSurveyItem(survey.id, surveyItem);
+    };
+
+    onUpdateSurveyItem = (surveyItem: SurveyItem) => {
+        const { survey } = this.props;
+        this.props.onUpdateSurveyItem(survey.id, surveyItem);
     };
 }
