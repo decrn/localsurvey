@@ -1,6 +1,7 @@
 import { Icon, Input, Switch } from 'antd';
 import Search from 'antd/lib/input/Search';
 import React, { SFC } from 'react';
+import uuid from 'uuid/v4';
 import { SurveyItem, SurveyItemType } from '../../../../common/types/survey-item.type';
 
 interface SurveyQuestionTypeProps {
@@ -75,7 +76,7 @@ const MultiOptionQuestion: SFC<SurveyQuestionTypeProps> = ({
             question.responses.map((option: string, index: number) => (
                 <Input
                     className="question-input"
-                    key={index} // TODO: dont iterate using index
+                    key={uuid()}
                     addonBefore={`Option ${index + 1}`}
                     defaultValue={option}
                     onBlur={e =>
