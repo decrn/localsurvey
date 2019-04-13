@@ -26,7 +26,7 @@ export class EditableTitle extends Component<EditableTitleProps, EditableTitleSt
     }
 
     onPressSave = () => {
-        this.setState({ editing: false, value: this.state.newValue });
+        this.setState(prevState => ({ editing: false, value: prevState.newValue }));
         this.props.onTitleUpdated(this.state.newValue);
     };
 
