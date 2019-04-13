@@ -1,5 +1,5 @@
 import { Icon, Tooltip } from 'antd';
-import React, { SFC } from 'react';
+import React, { MouseEventHandler, SFC } from 'react';
 
 /**
  * Displays a bunch of icons with quick actions when hovering
@@ -13,7 +13,7 @@ export interface ToolboxAction {
 export interface ToolboxActionConfiguration {
     tooltip?: string;
     icon: string; // See https://ant.design/components/icon/
-    onPress: Function;
+    onPress: MouseEventHandler;
 }
 
 export interface ToolboxProps {
@@ -33,7 +33,7 @@ export const SurveyQuestionToolbox: SFC<ToolboxProps> = (props: ToolboxProps): J
             {visible &&
                 Object.entries(props.actions).map(([name, { tooltip, icon, onPress }]) => (
                     <div className="toolbox-action" key={name}>
-                        <a onClick={() => onPress()}>
+                        <a onClick={onPress}>
                             <Tooltip placement="right" title={tooltip} mouseEnterDelay={TOOLTIP_DELAY_MS / 1000}>
                                 <Icon style={{ color: '#aaa' }} type={icon} />
                             </Tooltip>

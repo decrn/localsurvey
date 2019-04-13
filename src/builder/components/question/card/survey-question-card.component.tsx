@@ -14,14 +14,12 @@ export interface SurveyQuestionCardProps {
 }
 
 export interface SurveyQuestionCardState {
-    toolboxVisible?: boolean;
-    nameEditing: boolean;
+    toolboxVisible: boolean;
 }
 
 export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, SurveyQuestionCardState> {
     state = {
         toolboxVisible: false,
-        nameEditing: false,
     };
 
     deleteMessage = () => {
