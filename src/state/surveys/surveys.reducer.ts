@@ -43,7 +43,7 @@ export function surveysReducer(state: SurveysState = initialSurveysState, action
                     survey.id === action.payload.surveyId
                         ? {
                               ...survey,
-                              items: [...survey.items.filter(item => item.id !== action.payload.surveyItem.id)],
+                              items: [...survey.items.filter(item => item.id !== action.payload.surveyItemId)],
                           }
                         : survey,
                 ),

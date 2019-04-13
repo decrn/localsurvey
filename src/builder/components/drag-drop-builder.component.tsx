@@ -10,7 +10,7 @@ import { SurveyQuestionCard } from './question/card/survey-question-card.compone
 export interface DragDropBuilderProps {
     surveyItems: SurveyItem[];
     onAddSurveyItem: (item: SurveyItem) => void;
-    onRemoveSurveyItem: (item: SurveyItem) => void;
+    onRemoveSurveyItem: (itemId: string) => void;
     onUpdateSurveyItem: (item: SurveyItem) => void;
 }
 
@@ -42,8 +42,8 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
         );
     }
 
-    onDelete = (surveyItem: SurveyItem) => {
-        this.props.onRemoveSurveyItem(surveyItem);
+    onDelete = (surveyItemId: string) => {
+        this.props.onRemoveSurveyItem(surveyItemId);
     };
 
     onUpdate = (surveyItem: SurveyItem) => {

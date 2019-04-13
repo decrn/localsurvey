@@ -27,7 +27,7 @@ export class AddSurveyItemAction implements Action {
 
 export class RemoveSurveyItemAction implements Action {
     readonly type = SurveysActionType.RemoveSurveyItemAction;
-    constructor(public payload: { surveyId: string; surveyItem: SurveyItem }) {}
+    constructor(public payload: { surveyId: string; surveyItemId: string }) {}
 }
 
 export class UpdateSurveyItemAction implements Action {

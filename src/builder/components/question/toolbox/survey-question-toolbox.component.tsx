@@ -6,7 +6,7 @@ import React, { MouseEventHandler, SFC } from 'react';
  * on a survey question card
  */
 
-export interface ToolboxAction {
+export interface ToolboxActions {
     [key: string]: ToolboxActionConfiguration;
 }
 
@@ -18,7 +18,7 @@ export interface ToolboxActionConfiguration {
 
 export interface ToolboxProps {
     visible: boolean;
-    actions: ToolboxAction;
+    actions: ToolboxActions;
     tooltipDelay_ms?: number;
 }
 

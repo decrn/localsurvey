@@ -27,7 +27,7 @@ export interface BuilderContainerProps extends RouteComponentProps {
 
 export interface BuilderContainerDispatchProps {
     onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
-    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
+    onRemoveSurveyItem: (surveyId: string, surveyItemId: string) => void;
     onUpdateSurveyItem: (surveyId: string, surveyItem: SurveyItem) => void;
 }
 
@@ -42,8 +42,8 @@ const mapDispatchToProps = mappedDispatchProps<BuilderContainerDispatchProps>({
     onAddSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
         return new AddSurveyItemAction({ surveyId, surveyItem });
     },
-    onRemoveSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
-        return new RemoveSurveyItemAction({ surveyId, surveyItem });
+    onRemoveSurveyItem: (surveyId: string, surveyItemId: string) => {
+        return new RemoveSurveyItemAction({ surveyId, surveyItemId });
     },
     onUpdateSurveyItem: (surveyId: string, surveyItem: SurveyItem) => {
         return new UpdateSurveyItemAction({ surveyId, surveyItem });
@@ -90,9 +90,9 @@ export class BuilderContainer extends Component<BuilderContainerProps & BuilderC
         this.props.onAddSurveyItem(survey.id, surveyItem);
     };
 
-    onRemoveSurveyItem = (surveyItem: SurveyItem) => {
+    onRemoveSurveyItem = (surveyItemId: string) => {
         const { survey } = this.props;
-        this.props.onRemoveSurveyItem(survey.id, surveyItem);
+        this.props.onRemoveSurveyItem(survey.id, surveyItemId);
     };
 
     onUpdateSurveyItem = (surveyItem: SurveyItem) => {

@@ -4,12 +4,12 @@ import { SurveyItem } from '../../../../common/types/survey-item.type';
 import { EditableTitle } from '../editable-title/survey-question-editable-title.component';
 import { SurveyQuestionHighlight } from '../highlight/survey-question-highlight.component';
 import { SurveyQuestion } from '../survey-questions/survey-question.component';
-import { SurveyQuestionToolbox, ToolboxAction } from '../toolbox/survey-question-toolbox.component';
+import { SurveyQuestionToolbox, ToolboxActions } from '../toolbox/survey-question-toolbox.component';
 import './survey-question-card.component.less';
 
 export interface SurveyQuestionCardProps {
     question: SurveyItem;
-    onDelete: (item: SurveyItem) => void;
+    onDelete: (itemId: string) => void;
     onUpdate: (item: SurveyItem) => void;
 }
 
@@ -38,7 +38,7 @@ export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, Surve
         const { question } = this.props;
         const { type } = this.props.question;
 
-        const actions: ToolboxAction = {
+        const actions: ToolboxActions = {
             move: {
                 icon: 'drag',
                 onPress: () => {
@@ -57,7 +57,7 @@ export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, Surve
                 icon: 'delete',
                 onPress: () => {
                     console.log(`Pressing: delete on type: ${question.type}`);
-                    this.props.onDelete(this.props.question);
+                    this.props.onDelete(this.props.question.id);
                     this.deleteMessage();
                 },
             },
