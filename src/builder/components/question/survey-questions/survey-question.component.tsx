@@ -16,7 +16,7 @@ export const SurveyQuestion: SFC<SurveyQuestionTypeProps> = ({
     switch (question.type) {
         case SurveyItemType.SingleChoice:
             return <YesNoSurveyQuestion onChange={onChange} question={question} />;
-        case SurveyItemType.MultiChoice:
+        case SurveyItemType.MultipleChoice:
             return <MultiOptionQuestion onChange={onChange} question={question} />;
         case SurveyItemType.OpenQuestion:
             return <OpenQuestion onChange={onChange} question={question} />;

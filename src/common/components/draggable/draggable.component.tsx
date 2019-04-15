@@ -9,7 +9,8 @@ export enum ItemTypes {
 
 export interface DraggableComponentProps {
     name: string;
-    onDrop: any;
+    value: string;
+    onDrop: (value: any) => void;
 }
 export interface DragProps {
     isDragging?: boolean; // Optional because this is provided by react-dnd
@@ -32,12 +33,12 @@ class DraggableComponent extends React.Component<DraggableComponentProps & DragP
 export const Draggable = DragSource<DraggableComponentProps>(
     ItemTypes.SurveyItem,
     {
-        beginDrag: ({ name }: DraggableComponentProps) => ({ name }),
+        beginDrag: ({ value }: DraggableComponentProps) => ({ value }),
 
-        endDrag: ({ onDrop, name }: DraggableComponentProps, monitor: DragSourceMonitor) => {
+        endDrag: ({ onDrop, value }: DraggableComponentProps, monitor: DragSourceMonitor) => {
             const dropResult = monitor.getDropResult();
             if (dropResult) {
-                onDrop(name);
+                onDrop(value);
             }
         },
     },

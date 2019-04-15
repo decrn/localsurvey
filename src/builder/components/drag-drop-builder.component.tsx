@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 import { Draggable } from '../../common/components/draggable/draggable.component';
 import { DropTarget } from '../../common/components/drop-target/drop-target.component';
-import { SurveyItem, SurveyItemType } from '../../common/types/survey-item.type';
+import { SurveyItemType, SurveyQuestion } from '../../common/types/survey-item.type';
 import './drag-drop-builder.component.less';
 import { SurveyQuestionCard } from './question/card/survey-question-card.component';
 
 export interface DragDropBuilderProps {
-    surveyItems: SurveyItem[];
-    onAddSurveyItem: (item: SurveyItem) => void;
+    surveyItems: SurveyQuestion[];
+    onAddSurveyItem: (item: SurveyQuestion) => void;
     onRemoveSurveyItem: (itemId: string) => void;
-    onUpdateSurveyItem: (item: SurveyItem) => void;
+    onUpdateSurveyItem: (item: SurveyQuestion) => void;
 }
 
 export class DragDropBuilder extends Component<DragDropBuilderProps> {
@@ -34,9 +34,9 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
                 </Card>
                 <Card className="elements">
                     <h2>Survey Elements</h2>
-                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.SingleChoice)} name="Single Choice" />
-                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.MultiChoice)} name="Multiple Choice" />
-                    <Draggable onDrop={(e: any) => this.onDrop(e, SurveyItemType.OpenQuestion)} name="Open Question" />
+                    <Draggable onDrop={this.onDrop} value={SurveyItemType.SingleChoice} name="Single Choice" />
+                    <Draggable onDrop={this.onDrop} value={SurveyItemType.MultipleChoice} name="Multiple Choice" />
+                    <Draggable onDrop={this.onDrop} value={SurveyItemType.OpenQuestion} name="Open Question" />
                 </Card>
             </div>
         );
@@ -46,11 +46,11 @@ export class DragDropBuilder extends Component<DragDropBuilderProps> {
         this.props.onRemoveSurveyItem(surveyItemId);
     };
 
-    onUpdate = (surveyItem: SurveyItem) => {
+    onUpdate = (surveyItem: SurveyQuestion) => {
         this.props.onUpdateSurveyItem(surveyItem);
     };
 
-    onDrop = (choice: string, type: SurveyItemType) => {
+    onDrop = (type: SurveyItemType): void => {
         this.props.onAddSurveyItem({
             type,
             id: uuid(),
