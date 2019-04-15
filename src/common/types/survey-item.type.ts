@@ -1,22 +1,13 @@
+import { SupportiveContent } from './supportive-content.type';
+
 export enum SurveyItemType {
-    SingleChoice = 'single',
-    MultipleChoice = 'multi',
-    OpenQuestion = 'open',
+    Question = 'question',
+    SimpleContent = 'simple-content',
 }
 
-export interface SurveyQuestion {
+export interface SurveyItem {
     id: string;
-    description: string;
     type: SurveyItemType;
-    responses: string[];
-}
-
-export interface SingleChoice extends SurveyQuestion {
-    type: SurveyItemType.SingleChoice;
-}
-export interface MultipleChoice extends SurveyQuestion {
-    type: SurveyItemType.MultipleChoice;
-}
-export interface OpenQuestion extends SurveyQuestion {
-    type: SurveyItemType.OpenQuestion;
+    title: string;
+    content?: SupportiveContent;
 }
