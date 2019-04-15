@@ -17,6 +17,7 @@ export function surveysReducer(state: SurveysState = initialSurveysState, action
     switch (action.type) {
         case SurveysActionType.ChangeSurveysFilterAction:
             return { ...state, filter: action.payload.filter };
+
         case SurveysActionType.UpdateSurveyAction:
             return {
                 ...state,
@@ -31,6 +32,38 @@ export function surveysReducer(state: SurveysState = initialSurveysState, action
                 surveys: state.surveys.map(survey =>
                     survey.id === action.payload.surveyId
                         ? { ...survey, items: [...survey.items, action.payload.surveyItem] }
+                        : survey,
+                ),
+            };
+
+        case SurveysActionType.RemoveSurveyItemAction:
+            return {
+                ...state,
+                surveys: state.surveys.map(survey =>
+                    survey.id === action.payload.surveyId
+                        ? {
+                              ...survey,
+                              items: [...survey.items.filter(item => item.id !== action.payload.surveyItemId)],
+                          }
+                        : survey,
+                ),
+            };
+
+        case SurveysActionType.UpdateSurveyItemAction:
+            return {
+                ...state,
+                surveys: state.surveys.map(survey =>
+                    survey.id === action.payload.surveyId
+                        ? {
+                              ...survey,
+                              items: [
+                                  ...survey.items.map(item => {
+                                      return item.id === action.payload.surveyItem.id
+                                          ? action.payload.surveyItem
+                                          : item;
+                                  }),
+                              ],
+                          }
                         : survey,
                 ),
             };

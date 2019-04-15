@@ -23,16 +23,19 @@ const defaultColors = [
     '#607d8b',
 ];
 
-// TODO: make Colorpicker work inside a antd form
+type ColorPickerState = {
+    displayColorPicker: boolean;
+    color: string;
+};
 
-export class ColorPicker extends Component {
+export class ColorPicker extends Component<{}, ColorPickerState> {
     state = {
         displayColorPicker: false,
         color: '#2196f3',
     };
 
     handleClick = () => {
-        this.setState({ displayColorPicker: !this.state.displayColorPicker });
+        this.setState(prevState => ({ displayColorPicker: !prevState.displayColorPicker }));
     };
 
     handleClose = () => {
