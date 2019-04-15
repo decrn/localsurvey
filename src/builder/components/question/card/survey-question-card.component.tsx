@@ -14,19 +14,19 @@ export interface SurveyQuestionCardProps {
 }
 
 export interface SurveyQuestionCardState {
-    toolboxVisible: boolean;
+    isToolboxVisible: boolean;
 }
 
 export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, SurveyQuestionCardState> {
     state = {
-        toolboxVisible: false,
+        isToolboxVisible: false,
     };
 
     deleteMessage = () => {
         message.success(`${this.props.question.description} removed successfully!`);
     };
 
-    toggleHover = () => this.setState(prevState => ({ toolboxVisible: !prevState.toolboxVisible }));
+    toggleHover = () => this.setState(prevState => ({ isToolboxVisible: !prevState.isToolboxVisible }));
 
     editSurveyTitle = (newTitle: string) => {
         const { question } = this.props;
@@ -78,7 +78,7 @@ export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, Surve
                         />
                         <SurveyQuestion onChange={this.onChange} question={question} />
                     </div>
-                    <SurveyQuestionToolbox actions={actions} visible={this.state.toolboxVisible} />
+                    <SurveyQuestionToolbox actions={actions} visible={this.state.isToolboxVisible} />
                 </div>
             </div>
         );
