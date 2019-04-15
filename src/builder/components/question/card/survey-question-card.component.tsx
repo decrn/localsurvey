@@ -26,7 +26,8 @@ export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, Surve
         message.success(`${this.props.question.description} removed successfully!`);
     };
 
-    toggleHover = () => this.setState(prevState => ({ isToolboxVisible: !prevState.isToolboxVisible }));
+    showToolbox = () => this.setState({ isToolboxVisible: true });
+    hideToolbox = () => this.setState({ isToolboxVisible: false });
 
     editSurveyTitle = (newTitle: string) => {
         const { question } = this.props;
@@ -67,7 +68,7 @@ export class SurveyQuestionCard extends Component<SurveyQuestionCardProps, Surve
         };
 
         return (
-            <div onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} className="question-card">
+            <div onMouseEnter={this.showToolbox} onMouseLeave={this.hideToolbox} className="question-card">
                 <div className="question">
                     <SurveyQuestionHighlight type={type} />
                     <div className="question-content">
